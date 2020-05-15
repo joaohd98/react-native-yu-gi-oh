@@ -1,3 +1,3 @@
 export type RoutesName = {
-  ShowCardsScreen: undefined
-}
+  ShowCardsScreen: undefined;
+};

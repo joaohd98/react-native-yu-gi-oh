@@ -7,5 +7,4 @@ module.exports = {
   bracketSpacing: false,
   arrowParens: 'avoid',
   proseWrap: 'always',
-
 };

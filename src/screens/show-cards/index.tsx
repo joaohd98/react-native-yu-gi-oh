@@ -1,14 +1,13 @@
-import React from 'react';
-import {Text, View} from 'react-native';
+import React from "react";
+import {View} from "react-native";
+import {ShowCardsInputSearch} from "./components/input-search";
 
 export class ShowCardsScreen extends React.PureComponent {
-
   render() {
     return (
-      <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-        <Text>ShowCardsScreen</Text>
+      <View>
+        <ShowCardsInputSearch />
       </View>
     );
   }
-
 }
