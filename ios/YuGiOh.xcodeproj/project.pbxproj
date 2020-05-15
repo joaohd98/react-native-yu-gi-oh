@@ -19,6 +19,7 @@
 		52EFD6C126F99CF1EFF9674D /* libPods-YuGiOh-YuGiOhTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 72664D74ABF4505484AC53D4 /* libPods-YuGiOh-YuGiOhTests.a */; };
 		AA10C0DC17B947E93D014264 /* libPods-YuGiOh.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3B470516EF3FF32658A607E /* libPods-YuGiOh.a */; };
 		BF45FE067BF55309D63BD41D /* libPods-YuGiOh-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F2FA02EC75BA43D9F4AC463 /* libPods-YuGiOh-tvOS.a */; };
+		DC6BA493246EEE270045995F /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DC6BA492246EEE270045995F /* FontAwesome.ttf */; };
 		ECD37376B38D12714F48E2E9 /* libPods-YuGiOh-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CA20F35E0B36397B532B98EC /* libPods-YuGiOh-tvOSTests.a */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,7 @@
 		A01DB7AAD9963E26E1861009 /* Pods-YuGiOh.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YuGiOh.release.xcconfig"; path = "Target Support Files/Pods-YuGiOh/Pods-YuGiOh.release.xcconfig"; sourceTree = "<group>"; };
 		A3B470516EF3FF32658A607E /* libPods-YuGiOh.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YuGiOh.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA20F35E0B36397B532B98EC /* libPods-YuGiOh-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YuGiOh-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC6BA492246EEE270045995F /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		DF4E605A1EE254BAF9CEBE57 /* Pods-YuGiOh-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YuGiOh-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-YuGiOh-tvOS/Pods-YuGiOh-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		E8DD69AE420F82A0009C02D0 /* Pods-YuGiOh-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YuGiOh-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-YuGiOh-tvOSTests/Pods-YuGiOh-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -159,6 +161,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				DC6BA491246EEE270045995F /* Fonts */,
 				13B07FAE1A68108700A75B9A /* YuGiOh */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* YuGiOhTests */,
@@ -194,8 +197,15 @@
 				E8DD69AE420F82A0009C02D0 /* Pods-YuGiOh-tvOSTests.debug.xcconfig */,
 				0A124800490278B06A6CCCC5 /* Pods-YuGiOh-tvOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		DC6BA491246EEE270045995F /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				DC6BA492246EEE270045995F /* FontAwesome.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -342,6 +352,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				DC6BA493246EEE270045995F /* FontAwesome.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
