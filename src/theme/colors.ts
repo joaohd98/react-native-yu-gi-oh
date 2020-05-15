@@ -1,3 +1,4 @@
 export const Colors = {
-  headerColor: "rgba(0, 0, 0 .1)",
+  headerColor: "rgb(226, 226, 226)",
+  grayLight: "rgb(210, 210, 210)",
 };

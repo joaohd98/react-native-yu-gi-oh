@@ -1,8 +1,16 @@
 import React from "react";
-import {Text} from "react-native";
+import {ShowCardsInputSearchStyles} from "./styles";
 
 export class ShowCardsInputSearch extends React.PureComponent {
   render() {
-    return <Text>AAAAA</Text>;
+    const {View, Input, EraseButton, CancelButton} = ShowCardsInputSearchStyles;
+
+    return (
+      <View>
+        <Input />
+        <EraseButton />
+        <CancelButton />
+      </View>
+    );
   }
 }
