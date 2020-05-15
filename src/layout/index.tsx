@@ -2,8 +2,9 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {ShowCardsScreen} from '../screens/show-cards';
+import {RoutesName} from '../routes/routes-name';
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<RoutesName>();
 
 export class Layout extends React.PureComponent {
 
@@ -11,7 +12,7 @@ export class Layout extends React.PureComponent {
     return (
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Home" component={ShowCardsScreen} />
+          <Stack.Screen name="ShowCardsScreen" component={ShowCardsScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     );
