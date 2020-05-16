@@ -8,11 +8,7 @@ import {
   TouchableOpacity,
   Vibration,
 } from "react-native";
-import {
-  InputAnimatedStyles,
-  TextAnimatedStyles,
-  ViewAnimatedStyles,
-} from "../../../../helpers/animated-types";
+import {InputAnimatedStyles, ViewAnimatedStyles} from "../../../../helpers/animated-types";
 import {ShowCardsInputSearchConst} from "./const";
 import Icon from "react-native-vector-icons/FontAwesome";
 import {Colors} from "../../../../theme/colors";
