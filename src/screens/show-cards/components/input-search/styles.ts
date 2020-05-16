@@ -3,7 +3,7 @@ import {Colors} from "../../../../theme/colors";
 import Icon from "react-native-vector-icons/FontAwesome";
 import {Animated, TextInput, TouchableOpacity} from "react-native";
 
-const AnimatedIcon = Animated.createAnimatedComponent(Icon);
+const AnimatedIcon = Animated.createAnimatedComponent(TouchableOpacity);
 const AnimatedTouchableOpacity = Animated.createAnimatedComponent(TouchableOpacity);
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
@@ -32,8 +32,12 @@ export const ShowCardsInputSearchStyles = {
   `,
   EraseButton: styled(AnimatedIcon)`
     position: absolute;
-    top: 17px;
     right: 90px;
+    top: 18px;
+    font-size: 18px;
+    color: ${Colors.grayDark};
+    width: 20px;
+    height: 20px;
   `,
   CancelButton: styled(Animated.View)`
     flex: 1;
