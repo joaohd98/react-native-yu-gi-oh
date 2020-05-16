@@ -31,7 +31,7 @@ export class ShowCardsInputSearch extends React.Component<Props, State> {
   state: State = {
     blurFocusAnimation: new Animated.Value(0),
     hasInputFocus: false,
-    inputText: "asdasdasasdsadsadsadsa",
+    inputText: "",
     inputLayout: null,
     placeholderFalseLayout: null,
   };
@@ -62,6 +62,33 @@ export class ShowCardsInputSearch extends React.Component<Props, State> {
     this.setState({placeholderFalseLayout: event.nativeEvent.layout});
   };
 
+  getInputLayout = () => {
+
+    return (
+      <>
+        <Input
+          onLayout={this.setSizeInput}
+          ref={(ref: TextInput) => (this.inputRef = ref)}
+          placeholder={placeholder}
+          style={inputStyle}
+          onFocus={() => this.handleInputFocus(false)}
+          onBlur={() => this.handleInputFocus(true)}
+          value={inputText}
+          onChangeText={(inputText: string) => this.setState({inputText})}
+        />
+        <FalsePlaceholder
+          onLayout={this.setSizeText}
+          activeOpacity={1}
+          onPress={() => this.inputRef?.focus()}
+        >
+          <FalsePlaceholderText numberOfLines={1}>
+            {inputText ? inputText : placeholder}
+          </FalsePlaceholderText>
+        </FalsePlaceholder>
+      </>
+    )
+  }
+
   render() {
     const {
       View,
@@ -76,7 +103,6 @@ export class ShowCardsInputSearch extends React.Component<Props, State> {
     const {
       blurFocusAnimation,
       inputText,
-      hasInputFocus,
       inputLayout,
       placeholderFalseLayout,
     } = this.state;
@@ -85,16 +111,21 @@ export class ShowCardsInputSearch extends React.Component<Props, State> {
 
     const eraseButtonStyle: TextAnimatedStyles = {
       opacity: blurFocusAnimation,
-    };
-
-    const inputStyle: InputAnimatedStyles = {
-      color: blurFocusAnimation.interpolate({
-        inputRange: [0, 0.99, 1],
-        outputRange: ["transparent", "transparent", hasInputFocus ? Colors.black : Colors.grayDark],
-      }),
+      transform: [
+        {
+          translateX: blurFocusAnimation.interpolate({
+            inputRange: [0, 1],
+            outputRange: [40, 0],
+          }),
+        },
+      ],
     };
 
     const cancelButtonStyle: ViewAnimatedStyles = {
+      marginRight: blurFocusAnimation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 10],
+      }),
       maxWidth: blurFocusAnimation.interpolate({
         inputRange: [0, 1],
         outputRange: [0, 100],
@@ -114,43 +145,23 @@ export class ShowCardsInputSearch extends React.Component<Props, State> {
 
     const placeholderLeftValue = (widthInput - widthPlaceholder) / 2;
 
-    const falsePlaceholderStyle: ViewAnimatedStyles = {
-      opacity: blurFocusAnimation.interpolate({
-        inputRange: [0, 0.99, 1],
-        outputRange: [1, 1, 0],
-      }),
-      left: blurFocusAnimation.interpolate({
+    const inputStyle: InputAnimatedStyles = {
+      paddingRight: blurFocusAnimation.interpolate({
         inputRange: [0, 1],
-        outputRange: [placeholderLeftValue, 0],
+        outputRange: [0, 30],
+      }),
+      paddingLeft: blurFocusAnimation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [placeholderLeftValue, 15],
       }),
     };
 
     return (
       <View>
-        <Input
-          onLayout={this.setSizeInput}
-          ref={(ref: TextInput) => (this.inputRef = ref)}
-          placeholder={hasInputFocus ? placeholder : ""}
-          style={inputStyle}
-          onFocus={() => this.handleInputFocus(false)}
-          onBlur={() => this.handleInputFocus(true)}
-          value={inputText}
-          onChangeText={(inputText: string) => this.setState({inputText})}
-          hasFocus={hasInputFocus}
-        />
-        <FalsePlaceholder
-          onLayout={this.setSizeText}
-          style={falsePlaceholderStyle}
-          activeOpacity={1}
-          onPress={() => this.inputRef?.focus()}
-        >
-          <FalsePlaceholderText numberOfLines={1} hasInputText={inputText !== ""}>
-            {inputText ? inputText : placeholder}
-          </FalsePlaceholderText>
-        </FalsePlaceholder>
+
         <EraseButton name="times-circle" size={20} style={eraseButtonStyle} color={Colors.white} />
         <TouchableOpacity onPress={this.handleCancelButton}>
-          <CancelButton style={cancelButtonStyle} hasFocus={hasInputFocus}>
+          <CancelButton style={cancelButtonStyle}>
             <CancelButtonText numberOfLines={1}>{cancelText}</CancelButtonText>
           </CancelButton>
         </TouchableOpacity>

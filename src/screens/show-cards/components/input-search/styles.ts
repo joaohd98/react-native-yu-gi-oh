@@ -12,33 +12,30 @@ export const ShowCardsInputSearchStyles = {
     background-color: ${Colors.headerColor};
     flex-direction: row;
   `,
-  Input: styled(AnimatedTextInput)<{hasInputText: boolean}>`
+  Input: styled(AnimatedTextInput)`
     flex: 1;
     width: 100%;
     border: 1px solid ${Colors.grayLight};
     border-radius: 10px;
-    padding: 5px 30px 5px 5px;
+    padding: 5px;
     background-color: ${Colors.grayLight};
     font-size: 18px;
     margin: 2.5%;
     opacity: 1;
-    color: ${props => (props.hasInputText ? Colors.black : Colors.grayDark)};
   `,
   FalsePlaceholder: styled(AnimatedTouchableOpacity)`
     position: absolute;
-    padding: 5px;
-    margin: 2.5%;
+    opacity: 0;
   `,
-  FalsePlaceholderText: styled(Animated.Text)<{hasInputText: boolean}>`
+  FalsePlaceholderText: styled(Animated.Text)`
     font-size: 18px;
-    color: ${props => (props.hasInputText ? Colors.black : Colors.grayDark)};
   `,
   EraseButton: styled(AnimatedIcon)`
     position: absolute;
     top: 17px;
-    right: 85px;
+    right: 90px;
   `,
-  CancelButton: styled(Animated.View)<{hasFocus: boolean}>`
+  CancelButton: styled(Animated.View)`
     flex: 1;
     justify-content: center;
     align-items: center;
