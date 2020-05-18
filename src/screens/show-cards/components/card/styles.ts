@@ -7,10 +7,15 @@ import {Colors} from "../../../../theme/colors";
 const AnimatedIcon = Animated.createAnimatedComponent(Icon);
 
 export const ShowCardsListCardStyles = {
+  Container: styled.View`
+    background-color: ${Colors.grayLight};
+  `,
   View: styled.View`
     flex: 1;
-    flex-direction: row;
+    background-color: ${Colors.backgroundColor};
     padding: 5px;
+    margin-horizontal: 5px;
+    flex-direction: row;
   `,
   Image: styled.Image`
     width: ${HelperStyles.getPercentSizePage("width", 30)};

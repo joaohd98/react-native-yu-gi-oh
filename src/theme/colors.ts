@@ -5,4 +5,5 @@ export const Colors = {
   white: "rgb(255, 255, 255)",
   blue: "rgb(6,69,173)",
   black: "rgb(0, 0, 0)",
+  backgroundColor: "rgb(242, 242, 242)",
 };
