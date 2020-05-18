@@ -1,0 +1,45 @@
+import styled from "styled-components/native";
+import {HelperStyles} from "../../../../helpers/styles";
+import Icon from "react-native-vector-icons/FontAwesome";
+import {Animated} from "react-native";
+
+const AnimatedIcon = Animated.createAnimatedComponent(Icon);
+
+export const ShowCardsListCardStyles = {
+  View: styled.View`
+    flex: 1;
+    flex-direction: row;
+    padding: 5px;
+    margin-vertical: 5px;
+  `,
+  Image: styled.Image`
+    width: ${HelperStyles.getPercentSizePage("width", 30)};
+    height: ${HelperStyles.getPercentSizePage("height", 20)};
+  `,
+  ViewText: styled.View`
+    flex: 1;
+    justify-content: center;
+    padding-horizontal: 5px;
+  `,
+  TextName: styled.Text`
+    font-weight: 700;
+    font-size: 18px;
+  `,
+  ViewIcons: styled.View`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+  `,
+  IconButton: styled.TouchableOpacity`
+    width: 40px;
+    height: 40px;
+    border: 1px solid red;
+    border-radius: 50px;
+    align-items: center;
+    justify-content: center;
+  `,
+  Icon: styled(AnimatedIcon)`
+    font-size: 20px;
+  `,
+};
