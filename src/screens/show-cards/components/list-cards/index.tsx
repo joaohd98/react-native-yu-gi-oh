@@ -3,6 +3,7 @@ import React from "react";
 import {ViewAnimatedStyles} from "../../../../helpers/animated-types";
 import {ShowCardsListCard} from "../card";
 import {ShowCardsListStyles} from "./styles";
+import {Icon} from "react-native-vector-icons/Icon";
 
 interface Props {
   test?: undefined;
@@ -15,7 +16,7 @@ interface State {
 export class ShowCardsList extends React.Component<Props, State> {
   getAnimationStyle = (index: number) => {
     const isEven = index % 2 === 0;
-    const width = Dimensions.get("window").width * (isEven ? 1 : -1);
+    const width = (Dimensions.get("window").width / 2) * (isEven ? 1 : -1);
     const animated = new Animated.Value(width);
 
     Animated.timing(animated, {

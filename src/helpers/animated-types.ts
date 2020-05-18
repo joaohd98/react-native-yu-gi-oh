@@ -13,4 +13,5 @@ type AnimatedStyle<T> = {
 
 export type ViewAnimatedStyles = AnimatedStyle<ViewStyle>;
 export type TextAnimatedStyles = AnimatedStyle<TextStyle>;
+export type IconAnimatedStyles = AnimatedStyle<TextStyle>;
 export type InputAnimatedStyles = AnimatedStyle<TextStyle>;

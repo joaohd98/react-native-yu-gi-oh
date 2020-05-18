@@ -15,12 +15,21 @@ interface State {
 
 export class ShowCardsListCard extends React.Component<Props, State> {
   render() {
-    const {Container, View, Image, ViewText, TextName, ViewIcons, IconButton, Icon} = ShowCardsListCardStyles;
-    const {image} = this.props;
+    const {
+      Container,
+      View,
+      Image,
+      ViewText,
+      TextName,
+      ViewIcons,
+      IconButton,
+      Icon,
+    } = ShowCardsListCardStyles;
+    const {image, style} = this.props;
 
     return (
       <Container>
-        <View>
+        <View style={style}>
           <TouchableOpacity>
             <Image resizeMode={"stretch"} source={{uri: image}} />
           </TouchableOpacity>
