@@ -1,9 +1,8 @@
-import {Animated, Dimensions, FlatList, FlatListProps, View, ViewProps} from "react-native";
+import {Animated, Dimensions, TouchableOpacity} from "react-native";
 import React from "react";
 import {ViewAnimatedStyles} from "../../../../helpers/animated-types";
 import {ShowCardsListCard} from "../card";
 import {ShowCardsListStyles} from "./styles";
-import {Icon} from "react-native-vector-icons/Icon";
 
 interface Props {
   test?: undefined;
@@ -12,6 +11,33 @@ interface Props {
 interface State {
   test: undefined;
 }
+
+const list = [
+  {
+    key: "1",
+    image: "https://ygoprodeck.com/pics/34541863.jpg",
+  },
+  {
+    key: "2",
+    image: "https://ygoprodeck.com/pics/64163367.jpg",
+  },
+  {
+    key: "4",
+    image: "https://ygoprodeck.com/pics/91231901.jpg",
+  },
+  {
+    key: "5",
+    image: "https://ygoprodeck.com/pics/34541863.jpg",
+  },
+  {
+    key: "6",
+    image: "https://ygoprodeck.com/pics/64163367.jpg",
+  },
+  {
+    key: "7",
+    image: "https://ygoprodeck.com/pics/91231901.jpg",
+  },
+];
 
 export class ShowCardsList extends React.Component<Props, State> {
   getAnimationStyle = (index: number) => {
@@ -48,34 +74,34 @@ export class ShowCardsList extends React.Component<Props, State> {
   };
 
   render() {
-    const {List} = ShowCardsListStyles;
-    const list = [
-      {
-        key: "1",
-        image: "https://ygoprodeck.com/pics/34541863.jpg",
-      },
-      {
-        key: "2",
-        image: "https://ygoprodeck.com/pics/64163367.jpg",
-      },
-      {
-        key: "3",
-        image: "https://ygoprodeck.com/pics/91231901.jpg",
-      },
-    ];
+    const {
+      List,
+      FullImageContainer,
+      FullImageButton,
+      FullImageIcon,
+      FullImage,
+    } = ShowCardsListStyles;
 
     return (
-      <List
-        data={list}
-        ItemSeparatorComponent={this.getSeparatorComponent}
-        renderItem={({item, index}) => (
-          <ShowCardsListCard
-            key={item.key}
-            image={item.image}
-            style={this.getAnimationStyle(index)}
-          />
-        )}
-      />
+      <>
+        <List
+          data={list}
+          ItemSeparatorComponent={this.getSeparatorComponent}
+          renderItem={({item, index}) => (
+            <ShowCardsListCard
+              key={item.key}
+              image={item.image}
+              style={this.getAnimationStyle(index)}
+            />
+          )}
+        />
+        <FullImageContainer>
+          <FullImageButton>
+            <FullImageIcon name={"times-circle"} />
+          </FullImageButton>
+          <FullImage source={{uri: list[0].image}} resizeMode={"contain"} />
+        </FullImageContainer>
+      </>
     );
   }
 }
