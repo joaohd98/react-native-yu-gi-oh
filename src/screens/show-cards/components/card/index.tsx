@@ -15,16 +15,8 @@ interface State {
 
 export class ShowCardsListCard extends React.Component<Props, State> {
   render() {
-    const {
-      View,
-      Image,
-      ViewText,
-      TextName,
-      ViewIcons,
-      IconButton,
-      Icon,
-    } = ShowCardsListCardStyles;
-    const {image, style} = this.props;
+    const {View, Image, ViewText, TextName, ViewIcons, IconButton, Icon} = ShowCardsListCardStyles;
+    const {image} = this.props;
 
     return (
       <View>

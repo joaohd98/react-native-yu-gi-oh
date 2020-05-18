@@ -2,6 +2,7 @@ import styled from "styled-components/native";
 import {HelperStyles} from "../../../../helpers/styles";
 import Icon from "react-native-vector-icons/FontAwesome";
 import {Animated} from "react-native";
+import {Colors} from "../../../../theme/colors";
 
 const AnimatedIcon = Animated.createAnimatedComponent(Icon);
 
@@ -10,7 +11,6 @@ export const ShowCardsListCardStyles = {
     flex: 1;
     flex-direction: row;
     padding: 5px;
-    margin-vertical: 5px;
   `,
   Image: styled.Image`
     width: ${HelperStyles.getPercentSizePage("width", 30)};
@@ -34,10 +34,11 @@ export const ShowCardsListCardStyles = {
   IconButton: styled.TouchableOpacity`
     width: 40px;
     height: 40px;
-    border: 1px solid red;
+    border: 1px solid ${Colors.white};
     border-radius: 50px;
     align-items: center;
     justify-content: center;
+    background-color: ${Colors.white};
   `,
   Icon: styled(AnimatedIcon)`
     font-size: 20px;

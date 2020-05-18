@@ -1,7 +1,8 @@
-import {Animated, Dimensions, FlatList, View} from "react-native";
+import {Animated, Dimensions, FlatList, FlatListProps, View, ViewProps} from "react-native";
 import React from "react";
 import {ViewAnimatedStyles} from "../../../../helpers/animated-types";
 import {ShowCardsListCard} from "../card";
+import {ShowCardsListStyles} from "./styles";
 
 interface Props {
   test?: undefined;
@@ -11,7 +12,7 @@ interface State {
   test: undefined;
 }
 
-export class ShowCardsListCards extends React.Component<Props, State> {
+export class ShowCardsList extends React.Component<Props, State> {
   getAnimationStyle = (index: number) => {
     const isEven = index % 2 === 0;
     const width = Dimensions.get("window").width * (isEven ? 1 : -1);
@@ -39,7 +40,14 @@ export class ShowCardsListCards extends React.Component<Props, State> {
     return viewStyle;
   };
 
+  getSeparatorComponent = () => {
+    const {Separator} = ShowCardsListStyles;
+
+    return <Separator />;
+  };
+
   render() {
+    const {List} = ShowCardsListStyles;
     const list = [
       {
         key: "1",
@@ -56,8 +64,9 @@ export class ShowCardsListCards extends React.Component<Props, State> {
     ];
 
     return (
-      <FlatList
+      <List
         data={list}
+        ItemSeparatorComponent={this.getSeparatorComponent}
         renderItem={({item, index}) => (
           <ShowCardsListCard
             key={item.key}
