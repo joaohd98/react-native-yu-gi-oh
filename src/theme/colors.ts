@@ -7,4 +7,6 @@ export const Colors = {
   black: "rgb(0, 0, 0)",
   backgroundColor: "rgb(242, 242, 242)",
   transparentBlack: "rgba(0, 0, 0, 0.7)",
+  skeletonColorText: "rgb(227, 227, 227)",
+  skeletonColorImage: "rgb(204, 204, 204)",
 };

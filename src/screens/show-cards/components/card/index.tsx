@@ -12,10 +12,20 @@ interface Props {
 }
 
 interface State {
-  test: undefined;
+  loading: boolean;
 }
 
 export class ShowCardsListCard extends React.Component<Props, State> {
+  state = {
+    loading: true,
+  };
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({loading: false});
+    }, 1000);
+  }
+
   render() {
     const {
       Container,
@@ -27,6 +37,7 @@ export class ShowCardsListCard extends React.Component<Props, State> {
       IconButton,
       Icon,
     } = ShowCardsListCardStyles;
+
     const {image, style, setRef, onOpenImage} = this.props;
 
     return (
@@ -36,16 +47,13 @@ export class ShowCardsListCard extends React.Component<Props, State> {
             <Image ref={ref => setRef(ref)} resizeMode={"stretch"} source={{uri: image}} />
           </TouchableOpacity>
           <ViewText>
-            <TextName>A Cell Breeding Device</TextName>
-            <TextName>A Cell Breeding Device</TextName>
+            <TextName isLoading={this.state.loading}>A Cell Breeding Device</TextName>
+            <TextName isLoading={this.state.loading}>A Cell Breeding Device</TextName>
             <TextName>A Cell Breeding Device</TextName>
             <TextName>A Cell Breeding Device</TextName>
             <TextName>A Cell Breeding Device</TextName>
           </ViewText>
           <ViewIcons>
-            <IconButton>
-              <Icon name={"heart"} />
-            </IconButton>
             <IconButton>
               <Icon name={"info"} />
             </IconButton>

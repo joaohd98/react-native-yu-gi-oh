@@ -4,6 +4,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import {Animated, ImageProps, TextProps, TouchableOpacityProps, ViewProps} from "react-native";
 import {Colors} from "../../../../theme/colors";
 import {IconAnimatedStyles, ViewAnimatedStyles} from "../../../../helpers/animated-types";
+import {CustomText} from "../../../../components/text";
 
 const AnimatedIcon = Animated.createAnimatedComponent(Icon);
 
@@ -25,16 +26,19 @@ export const ShowCardsListCardStyles = {
   ViewText: styled.View<ViewProps>`
     flex: 1;
     justify-content: center;
-    padding-horizontal: 5px;
+    padding-left: 10px;
+    padding-right: 5px;
   `,
-  TextName: styled.Text<TextProps>`
+  TextName: styled(CustomText)<TextProps>`
     font-weight: 700;
     font-size: 18px;
+    margin-vertical: 5px;
+    padding-vertical: 3px;
   `,
   ViewIcons: styled.View<ViewProps>`
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     padding: 5px;
   `,
   IconButton: styled.TouchableOpacity<TouchableOpacityProps>`
