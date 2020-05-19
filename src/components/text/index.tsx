@@ -6,6 +6,7 @@ import {
 } from "react-native";
 import {Colors} from "../../theme/colors";
 import {TextAnimatedStyles} from "../../helpers/animated-types";
+import {HelperStyles} from "../../helpers/styles";
 
 interface Props extends TextProps {
   isLoading?: boolean;
@@ -37,16 +38,10 @@ export class CustomText extends React.Component<Props, State> {
   }
 
   render() {
-    let backgroundColor = Colors.backgroundColor;
-    let color = Colors.black;
-    const styles = this.props.style;
-
-    if (styles) {
-      (styles as TextStyle[]).forEach(style => {
-        if (style.backgroundColor) backgroundColor = style.backgroundColor;
-        if (style.color) color = style.color;
-      });
-    }
+    const {getPropertyOfStyle} = HelperStyles;
+    const {style} = this.props;
+    const background = getPropertyOfStyle<string>(style, "backgroundColor", Colors.backgroundColor);
+    const color = getPropertyOfStyle<string>(style, "color", Colors.black);
 
     const styleAnimation: TextAnimatedStyles = {
       opacity: this.state.animation.interpolate({
@@ -55,18 +50,18 @@ export class CustomText extends React.Component<Props, State> {
       }),
       backgroundColor: this.state.animation.interpolate({
         inputRange: [0, 0.5],
-        outputRange: [Colors.skeletonColorText, backgroundColor],
+        outputRange: [Colors.skeletonColorText, background],
         extrapolate: "clamp",
       }),
       color: this.state.animation.interpolate({
         inputRange: [0, 0.5, 1],
-        outputRange: [Colors.skeletonColorText, backgroundColor, color],
+        outputRange: [Colors.skeletonColorText, background, color],
       }),
     };
 
     const props = {
       numberOfLines: this.props.numberOfLines,
-      style: [this.props.style, styleAnimation],
+      style: [style, styleAnimation],
     };
 
     return <Animated.Text {...props}>{this.props.children}</Animated.Text>;

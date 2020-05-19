@@ -1,7 +1,7 @@
 import React from "react";
 import {ViewAnimatedStyles} from "../../../../helpers/animated-types";
 import {ShowCardsListCardStyles} from "./styles";
-import {Image, TouchableOpacity} from "react-native";
+import {Image} from "react-native";
 
 interface Props {
   key: string;
@@ -43,9 +43,13 @@ export class ShowCardsListCard extends React.Component<Props, State> {
     return (
       <Container>
         <View style={style}>
-          <TouchableOpacity onPress={onOpenImage}>
-            <Image ref={ref => setRef(ref)} resizeMode={"stretch"} source={{uri: image}} />
-          </TouchableOpacity>
+          <Image
+            ref={ref => setRef(ref)}
+            isLoading={this.state.loading}
+            onPress={onOpenImage}
+            resizeMode={"stretch"}
+            source={{uri: image}}
+          />
           <ViewText>
             <TextName isLoading={this.state.loading}>A Cell Breeding Device</TextName>
             <TextName isLoading={this.state.loading}>A Cell Breeding Device</TextName>

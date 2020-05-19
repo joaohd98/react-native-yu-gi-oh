@@ -5,6 +5,7 @@ import {Animated, ImageProps, TextProps, TouchableOpacityProps, ViewProps} from 
 import {Colors} from "../../../../theme/colors";
 import {IconAnimatedStyles, ViewAnimatedStyles} from "../../../../helpers/animated-types";
 import {CustomText} from "../../../../components/text";
+import {CustomImage} from "../../../../components/image";
 
 const AnimatedIcon = Animated.createAnimatedComponent(Icon);
 
@@ -19,7 +20,7 @@ export const ShowCardsListCardStyles = {
     margin-horizontal: 5px;
     flex-direction: row;
   `,
-  Image: styled.Image<ImageProps>`
+  Image: styled(CustomImage)<ImageProps>`
     width: ${HelperStyles.getPercentSizePage("width", 30)};
     height: ${HelperStyles.getPercentSizePage("height", 20)};
   `,
