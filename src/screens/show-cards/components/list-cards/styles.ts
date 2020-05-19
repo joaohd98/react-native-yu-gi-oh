@@ -32,7 +32,6 @@ export const ShowCardsListStyles = {
     bottom: 0;
     left: 0;
     right: 0;
-    justify-content: center;
     align-items: center;
     background-color: ${Colors.transparentBlack};
   `,
@@ -46,8 +45,9 @@ export const ShowCardsListStyles = {
     color: ${Colors.white};
   `,
   FullImageView: styled.View<ViewProps>`
-    width: ${HelperStyles.getPercentSizePage("width", 75)};
-    height: ${HelperStyles.getPercentSizePage("height", 75)};
+    top: 0;
+    width: ${HelperStyles.getPercentSizePage("width", 90)};
+    height: ${HelperStyles.getPercentSizePage("height", 90)};
   `,
   FullImage: styled(Animated.Image)<ImageAnimatedStyles>`
     position: absolute;

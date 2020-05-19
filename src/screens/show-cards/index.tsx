@@ -7,7 +7,7 @@ export class ShowCardsScreen extends React.PureComponent {
   render() {
     return (
       <View>
-        {/*<ShowCardsInputSearch />*/}
+        <ShowCardsInputSearch />
         <ShowCardsList />
       </View>
     );

@@ -58,14 +58,15 @@ export class ShowCardsList extends React.Component<Props, State> {
   fullImageView: View | null = null;
   listImageRef: Image[] = [];
   imageDimensions: {x: number; y: number; width: number; height: number} | null = null;
-  pageRealSize: number = Dimensions.get("window").height;
+  pageSearchBarHeight: number = Dimensions.get("window").height;
 
   handleOpenImage = (index: number) => {
     const activeImage = this.listImageRef[index];
     const {position, size, opacity} = this.state.fullImageAnimation;
 
     activeImage.measure((x, y, width, height, pageX, pageY) => {
-      const valueY = pageY - this.pageRealSize;
+      const offset = Dimensions.get("window").height - this.pageSearchBarHeight;
+      const valueY = pageY - offset;
       this.imageDimensions = {x: pageX, y: valueY, width, height};
 
       position.setValue({x: pageX, y: valueY});
@@ -161,14 +162,13 @@ export class ShowCardsList extends React.Component<Props, State> {
     return (
       <FullImageContainer
         style={viewStyle}
-        onLayout={layout => (this.pageRealSize -= layout.nativeEvent.layout.height)}
         pointerEvents={this.state.activeIndex !== null ? "auto" : "none"}
       >
+        <FullImageView ref={ref => (this.fullImageView = ref)} />
+        <FullImage style={activeImageStyle} source={image} resizeMode={"contain"} />
         <FullImageButton onPress={this.handleCloseImage}>
           <FullImageIcon name={"times-circle"} />
         </FullImageButton>
-        <FullImageView ref={ref => (this.fullImageView = ref)} />
-        <FullImage style={activeImageStyle} source={image} resizeMode={"contain"} />
       </FullImageContainer>
     );
   };
@@ -213,6 +213,7 @@ export class ShowCardsList extends React.Component<Props, State> {
     return (
       <>
         <List
+          onLayout={ref => (this.pageSearchBarHeight = ref.nativeEvent.layout.height)}
           data={list}
           ItemSeparatorComponent={this.getSeparatorComponent}
           renderItem={({item, index}) => (
