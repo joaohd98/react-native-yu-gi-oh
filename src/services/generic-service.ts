@@ -2,20 +2,20 @@ import axios from "axios";
 import NetInfo from "@react-native-community/netinfo";
 import {ServiceResponse, ServiceStatus, ServiceStatusException} from "./model";
 
-export class Service {
+export class GenericService {
   static makeGetRequest = async <ResponseType>(
     url: string,
     params: {[key: string]: string} = {},
     headers: {[key: string]: string} = {}
   ): Promise<ServiceResponse<ResponseType>> =>
-    Service.makeRequest<ResponseType>(url, "get", headers, params);
+    GenericService.makeRequest<ResponseType>(url, "get", headers, params);
 
   static makePostRequest = async <ResponseType>(
     url: string,
     params: {[key: string]: string} = {},
     headers: {[key: string]: string} = {}
   ): Promise<ServiceResponse<ResponseType>> =>
-    Service.makeRequest<ResponseType>(url, "post", headers, params);
+    GenericService.makeRequest<ResponseType>(url, "post", headers, params);
 
   private static makeRequest = async <ResponseType>(
     url: string,
@@ -33,7 +33,7 @@ export class Service {
       });
 
       return {
-        data: response.data,
+        response: response.data.data,
       };
     } catch {
       const fetch = await NetInfo.fetch();

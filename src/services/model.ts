@@ -8,12 +8,12 @@ export enum ServiceStatus {
 
 export class ServiceStatusException extends Error {
   constructor(message) {
-    super(message); // (1)
-    this.name = "ServiceStatusException"; // (2)
+    super(message);
+    this.name = "ServiceStatusException";
   }
 }
 
 export interface ServiceResponse<Type> {
   status?: ServiceStatus;
-  data?: Type;
+  response?: Type;
 }
