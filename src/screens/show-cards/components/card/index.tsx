@@ -20,7 +20,7 @@ export class ShowCardsListCard extends React.Component<Props, State> {
     loading: true,
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     setTimeout(() => {
       this.setState({loading: false});
     }, 1000);

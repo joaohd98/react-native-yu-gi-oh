@@ -1,4 +1,6 @@
+import Config from "react-native-config";
+
 export const ShowCardsInputSearchConst = {
-  placeholder: "Digite a carta...",
+  placeholder: Config.API_URL,
   cancelText: "cancel",
 };
