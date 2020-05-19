@@ -1,15 +1,16 @@
 import styled from "styled-components/native";
 import {Colors} from "../../../../theme/colors";
 import {
+  Animated,
   FlatList,
   FlatListProps,
-  ImageProps,
   TextProps,
   TouchableOpacityProps,
   ViewProps,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import {HelperStyles} from "../../../../helpers/styles";
+import {ImageAnimatedStyles} from "../../../../helpers/animated-types";
 
 type Props = {
   key: string;
@@ -25,13 +26,12 @@ export const ShowCardsListStyles = {
     width: 100%;
     background-color: ${Colors.grayLight};
   `,
-  FullImageContainer: styled.View<ViewProps>`
+  FullImageContainer: styled(Animated.View)<ViewProps>`
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    flex: 1;
     justify-content: center;
     align-items: center;
     background-color: ${Colors.transparentBlack};
@@ -45,8 +45,13 @@ export const ShowCardsListStyles = {
     font-size: 40px;
     color: ${Colors.white};
   `,
-  FullImage: styled.Image<ImageProps>`
-    width: ${HelperStyles.getPercentSizePage("width", 80)};
-    height: ${HelperStyles.getPercentSizePage("height", 80)};
+  FullImageView: styled.View<ViewProps>`
+    width: ${HelperStyles.getPercentSizePage("width", 75)};
+    height: ${HelperStyles.getPercentSizePage("height", 75)};
+  `,
+  FullImage: styled(Animated.Image)<ImageAnimatedStyles>`
+    position: absolute;
+    top: 0;
+    left: 0;
   `,
 };

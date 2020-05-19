@@ -1,12 +1,14 @@
 import React from "react";
 import {ViewAnimatedStyles} from "../../../../helpers/animated-types";
 import {ShowCardsListCardStyles} from "./styles";
-import {TouchableOpacity} from "react-native";
+import {Image, TouchableOpacity} from "react-native";
 
 interface Props {
   key: string;
   image: string;
-  style?: ViewAnimatedStyles;
+  style: ViewAnimatedStyles;
+  setRef: (ref: Image) => void;
+  onOpenImage: () => void;
 }
 
 interface State {
@@ -25,13 +27,13 @@ export class ShowCardsListCard extends React.Component<Props, State> {
       IconButton,
       Icon,
     } = ShowCardsListCardStyles;
-    const {image, style} = this.props;
+    const {image, style, setRef, onOpenImage} = this.props;
 
     return (
       <Container>
         <View style={style}>
-          <TouchableOpacity>
-            <Image resizeMode={"stretch"} source={{uri: image}} />
+          <TouchableOpacity onPress={onOpenImage}>
+            <Image ref={ref => setRef(ref)} resizeMode={"stretch"} source={{uri: image}} />
           </TouchableOpacity>
           <ViewText>
             <TextName>A Cell Breeding Device</TextName>

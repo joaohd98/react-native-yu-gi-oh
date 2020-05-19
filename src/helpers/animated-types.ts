@@ -1,4 +1,4 @@
-import {Animated, TextStyle, ViewStyle} from "react-native";
+import {Animated, ImageStyle, TextStyle, ViewStyle} from "react-native";
 
 type MaybeAnimated<T> = T | Animated.Value | Animated.AnimatedInterpolation;
 type AnimatedScalar = string | number | undefined;
@@ -14,4 +14,5 @@ type AnimatedStyle<T> = {
 export type ViewAnimatedStyles = AnimatedStyle<ViewStyle>;
 export type TextAnimatedStyles = AnimatedStyle<TextStyle>;
 export type IconAnimatedStyles = AnimatedStyle<TextStyle>;
+export type ImageAnimatedStyles = AnimatedStyle<ImageStyle>;
 export type InputAnimatedStyles = AnimatedStyle<TextStyle>;
