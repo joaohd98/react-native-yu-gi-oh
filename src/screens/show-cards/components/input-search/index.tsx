@@ -39,13 +39,19 @@ export class ShowCardsInputSearch extends React.Component<Props, State> {
   handleInputFocus = (isFocused: boolean) => {
     const toValue = isFocused ? 0 : 1;
 
-    this.setState({hasInputFocus: !!toValue}, () => {
-      Animated.timing(this.state.blurFocusAnimation, {
-        toValue,
-        duration: 300,
-        useNativeDriver: false,
-      }).start();
+    const animation = Animated.timing(this.state.blurFocusAnimation, {
+      toValue,
+      duration: 300,
+      useNativeDriver: false,
     });
+
+    const setState = (callback = () => {}) => this.setState({hasInputFocus: !!toValue}, callback);
+
+    if (toValue === 1) {
+      animation.start(() => setState());
+    } else {
+      setState(() => animation.start());
+    }
   };
 
   handleCancelButton = () => {
