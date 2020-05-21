@@ -5,8 +5,8 @@ import {ShowCardsInputSearch} from "./components/input-search";
 import {ShowCardsList} from "./components/list-cards";
 import {StatesReducers} from "../../redux/reducers";
 import {ShowCardsScreenProps, ShowCardsScreenPropsActions} from "./model/props";
-import {ShowCardsScreenAction} from "./redux/action";
-import {Dispatch} from "redux";
+import {bindActionCreators, Dispatch} from "redux";
+import {ShowCardScreenInitial} from "./redux/reducer";
 
 export class ShowCards extends React.Component<ShowCardsScreenProps> {
   componentDidMount() {
@@ -28,7 +28,7 @@ const mapStateToProps = (state: StatesReducers): ShowCardsScreenProps => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): ShowCardsScreenPropsActions => ({
-  getAllCard: () => dispatch(ShowCardsScreenAction.getAllCard()),
+  getAllCard: bindActionCreators(ShowCardScreenInitial.getAllCard, dispatch),
 });
 
 export const ShowCardsScreen = connect(mapStateToProps, mapDispatchToProps)(ShowCards);

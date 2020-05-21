@@ -2,13 +2,14 @@ import {ShowCardsScreenProps} from "../model/props";
 import {ServiceStatus} from "../../../services/model";
 import {Reducer} from "redux";
 import {ShowCardsScreenActionConst, ShowCardsScreenActionType} from "./action-type";
+import {ShowCardsScreenAction} from "./action";
 
 export const ShowCardScreenInitial: ShowCardsScreenProps = {
   cards: [],
   status: ServiceStatus.loading,
   limit: 10,
   offset: 10,
-  getAllCard: () => {},
+  getAllCard: () => ShowCardsScreenAction.getAllCard(),
 };
 
 export const ShowCardScreenReducer: Reducer<ShowCardsScreenProps, ShowCardsScreenActionType> = (
