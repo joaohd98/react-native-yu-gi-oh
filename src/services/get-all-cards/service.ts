@@ -1,5 +1,5 @@
 import {AllCardsResponse} from "./response";
-import {ServiceResponse} from "../model";
+import {ServiceResponse, ServiceStatus} from "../model";
 import {GenericService} from "../generic-service";
 import {URL} from "../url";
 
@@ -13,7 +13,11 @@ export const getAllCards = async (): PromiseType => {
 
   return new Promise((resolve, reject) => {
     GenericService.makePostRequest<AllCardsResponse[]>(URL.getAllCard, {}, headers).then(
-      data => resolve({response: data.response!.map(value => new AllCardsResponse(value))}),
+      data =>
+        resolve({
+          status: ServiceStatus.success,
+          response: data.response!.map(value => new AllCardsResponse(value)),
+        }),
       error => reject(error)
     );
   });

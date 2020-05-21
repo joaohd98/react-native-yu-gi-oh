@@ -302,6 +302,8 @@ PODS:
     - React-Core (= 0.63.0-rc.1)
     - React-cxxreact (= 0.63.0-rc.1)
     - React-jsi (= 0.63.0-rc.1)
+  - RNCAsyncStorage (1.10.3):
+    - React
   - RNCMaskedView (0.1.10):
     - React
   - RNGestureHandler (1.6.1):
@@ -366,6 +368,7 @@ DEPENDENCIES:
   - React-RCTText (from `/Users/joaodamazio/Desktop/react-native-yu-gi-oh/node_modules/react-native/Libraries/Text`)
   - React-RCTVibration (from `/Users/joaodamazio/Desktop/react-native-yu-gi-oh/node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/turbomodule/core (from `/Users/joaodamazio/Desktop/react-native-yu-gi-oh/node_modules/react-native/ReactCommon`)
+  - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
@@ -445,6 +448,8 @@ EXTERNAL SOURCES:
     :path: "/Users/joaodamazio/Desktop/react-native-yu-gi-oh/node_modules/react-native/Libraries/Vibration"
   ReactCommon:
     :path: "/Users/joaodamazio/Desktop/react-native-yu-gi-oh/node_modules/react-native/ReactCommon"
+  RNCAsyncStorage:
+    :path: "../node_modules/@react-native-community/async-storage"
   RNCMaskedView:
     :path: "../node_modules/@react-native-community/masked-view"
   RNGestureHandler:
@@ -498,6 +503,7 @@ SPEC CHECKSUMS:
   React-RCTText: 1aa0fd4251b108777dd6218eb92d3613514b150f
   React-RCTVibration: b630e8fd023809796d47917d27caa343ade0678d
   ReactCommon: 6d0c6086911f7bf87b8406a92bb2ec66aeefd2e1
+  RNCAsyncStorage: 62559ca9a3e7790bac152a3e69bdd9ca349d37bd
   RNCMaskedView: f5c7d14d6847b7b44853f7acb6284c1da30a3459
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff

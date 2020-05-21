@@ -14,6 +14,6 @@ export class ServiceStatusException extends Error {
 }
 
 export interface ServiceResponse<Type> {
-  status?: ServiceStatus;
+  status: ServiceStatus;
   response?: Type;
 }
