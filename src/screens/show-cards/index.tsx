@@ -7,6 +7,7 @@ import {StatesReducers} from "../../redux/reducers";
 import {ShowCardsScreenProps, ShowCardsScreenPropsActions} from "./model/props";
 import {bindActionCreators, Dispatch} from "redux";
 import {ShowCardScreenInitial} from "./redux/reducer";
+import {Container} from "../../components/container";
 
 export class ShowCards extends React.Component<ShowCardsScreenProps> {
   componentDidMount() {
@@ -21,10 +22,10 @@ export class ShowCards extends React.Component<ShowCardsScreenProps> {
     const {status, cards, limit} = this.props;
 
     return (
-      <View>
+      <Container>
         <ShowCardsInputSearch />
         <ShowCardsList status={status} cards={cards.slice(0, limit)} />
-      </View>
+      </Container>
     );
   }
 }

@@ -1,8 +1,9 @@
 import React from "react";
-import {Animated, ImageProps, TouchableOpacity} from "react-native";
+import {Animated, ImageProps} from "react-native";
 import {HelperStyles} from "../../helpers/styles";
 import {Colors} from "../../theme/colors";
 import {TextAnimatedStyles, ViewAnimatedStyles} from "../../helpers/animated-types";
+import {CustomImageStyle} from "./styles";
 
 interface Props extends ImageProps {
   onPress?: () => void;
@@ -12,23 +13,19 @@ interface Props extends ImageProps {
 
 interface State {
   animation: Animated.Value;
+  hasLoad: boolean;
 }
-
-const AnimatedTouchableOpacity = Animated.createAnimatedComponent(TouchableOpacity);
 
 export class CustomImage extends React.Component<Props, State> {
   state: State = {
     animation: new Animated.Value(0),
+    hasLoad: false,
   };
 
-  componentDidMount() {
-    if (!this.props.isLoading) {
-      this.state.animation.setValue(1);
-    }
-  }
+  componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>) {
+    const hasLoaded = !prevState.hasLoad && this.state.hasLoad;
 
-  componentDidUpdate(prevProps: Readonly<Props>) {
-    if (prevProps.isLoading && !this.props.isLoading) {
+    if (!this.props.isLoading && hasLoaded) {
       Animated.timing(this.state.animation, {
         toValue: 1,
         duration: 500,
@@ -38,9 +35,13 @@ export class CustomImage extends React.Component<Props, State> {
   }
 
   render() {
-    const {getPropertyOfStyle} = HelperStyles;
+    const {TouchableOpacity, Image} = CustomImageStyle;
     const {style} = this.props;
-    const background = getPropertyOfStyle<string>(style, "backgroundColor", Colors.backgroundColor);
+    const background = HelperStyles.getPropertyOfStyle<string>(
+      style,
+      "backgroundColor",
+      Colors.backgroundColor
+    );
 
     const styleAnimation: TextAnimatedStyles = {
       opacity: this.state.animation.interpolate({
@@ -48,18 +49,13 @@ export class CustomImage extends React.Component<Props, State> {
         outputRange: [0, 0, 1],
       }),
     };
+
     const touchableAnimation: ViewAnimatedStyles = {
       backgroundColor: this.state.animation.interpolate({
         inputRange: [0, 1],
         outputRange: [Colors.skeletonColorImage, background],
         extrapolate: "clamp",
       }),
-    };
-
-    const imageProps = {
-      source: this.props.source,
-      style: [style, styleAnimation],
-      resizeMode: this.props.resizeMode,
     };
 
     const touchableOpacityProps = {
@@ -69,10 +65,17 @@ export class CustomImage extends React.Component<Props, State> {
       style: touchableAnimation,
     };
 
+    const imageProps = {
+      source: this.props.source,
+      style: [style, styleAnimation],
+      resizeMode: this.props.resizeMode,
+      onLoadEnd: () => this.setState({hasLoad: true}),
+    };
+
     return (
-      <AnimatedTouchableOpacity {...touchableOpacityProps}>
-        <Animated.Image {...imageProps} />
-      </AnimatedTouchableOpacity>
+      <TouchableOpacity {...touchableOpacityProps}>
+        <Image {...imageProps} />
+      </TouchableOpacity>
     );
   }
 }
