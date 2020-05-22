@@ -11,3 +11,7 @@ export interface ShowCardsScreenProps extends ShowCardsScreenPropsActions {
   limit: number;
   offset: number;
 }
+
+export interface ShowCardsScreenState {
+  screenHeight: number;
+}

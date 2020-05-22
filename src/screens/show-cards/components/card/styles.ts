@@ -27,15 +27,15 @@ export const ShowCardsListCardStyles = {
   `,
   ViewText: styled.View<ViewProps>`
     flex: 1;
-    justify-content: center;
+    justify-content: flex-start;
     padding-left: 10px;
     padding-right: 5px;
   `,
   TextName: styled(CustomText)<TextProps>`
     font-weight: 700;
     font-size: 14px;
-    margin-vertical: 5px;
-    padding-vertical: 3px;
+    height: 15px;
+    margin-vertical: 7.5px;
   `,
   ViewIcons: styled.View<ViewProps>`
     display: flex;

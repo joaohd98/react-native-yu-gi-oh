@@ -1,5 +1,5 @@
 import React from "react";
-import {Animated, ImageProps} from "react-native";
+import {Animated, Image, ImageProps} from "react-native";
 import {HelperStyles} from "../../helpers/styles";
 import {Colors} from "../../theme/colors";
 import {TextAnimatedStyles, ViewAnimatedStyles} from "../../helpers/animated-types";
@@ -9,6 +9,7 @@ interface Props extends ImageProps {
   onPress?: () => void;
   activeOpacity?: number;
   isLoading?: boolean;
+  setRef?: (ref: Image) => void;
 }
 
 interface State {
@@ -36,7 +37,7 @@ export class CustomImage extends React.Component<Props, State> {
 
   render() {
     const {TouchableOpacity, Image} = CustomImageStyle;
-    const {style} = this.props;
+    const {style, setRef} = this.props;
     const background = HelperStyles.getPropertyOfStyle<string>(
       style,
       "backgroundColor",
@@ -69,6 +70,7 @@ export class CustomImage extends React.Component<Props, State> {
       source: this.props.source,
       style: [style, styleAnimation],
       resizeMode: this.props.resizeMode,
+      ref: ref => (setRef ? setRef(ref) : {}),
       onLoadEnd: () => this.setState({hasLoad: true}),
     };
 

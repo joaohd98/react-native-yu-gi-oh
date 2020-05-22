@@ -9,6 +9,7 @@ import {AllCardsResponse} from "../../../../services/get-all-cards/response";
 interface Props {
   cards: AllCardsResponse[];
   status: ServiceStatus;
+  screenHeight: number;
 }
 
 interface State {
@@ -35,14 +36,13 @@ export class ShowCardsList extends React.Component<Props, State> {
   listRefImage: Image[] = [];
   fullImageView: View | null = null;
   imageDimensions: {x: number; y: number; width: number; height: number} | null = null;
-  pageSearchBarHeight = 0;
 
   handleOpenImage = (index: number) => {
     const activeImage = this.listRefImage[index];
     const {position, size, opacity} = this.state.fullImageAnimation;
 
     activeImage.measure((x, y, width, height, pageX, pageY) => {
-      const offset = Dimensions.get("window").height - this.pageSearchBarHeight;
+      const offset = Dimensions.get("window").height - this.props.screenHeight;
       const valueY = pageY - offset;
       this.imageDimensions = {x: pageX, y: valueY, width, height};
 
@@ -124,8 +124,7 @@ export class ShowCardsList extends React.Component<Props, State> {
     const {cards} = this.props;
     const {activeIndex} = this.state;
     const {size, position, opacity} = this.state.fullImageAnimation;
-    const image =
-      activeIndex !== null ? {uri: cards[activeIndex].card_images[0].image_url_small} : undefined;
+    const image = activeIndex !== null ? {uri: cards[activeIndex].getImage("big")} : undefined;
 
     const viewStyle = {
       opacity: opacity,
@@ -150,6 +149,12 @@ export class ShowCardsList extends React.Component<Props, State> {
         </FullImageButton>
       </FullImageContainer>
     );
+  };
+
+  getSeparatorComponent = () => {
+    const {Separator} = ShowCardsListStyles;
+
+    return <Separator />;
   };
 
   getAnimationStyle = (index: number) => {
@@ -185,12 +190,6 @@ export class ShowCardsList extends React.Component<Props, State> {
     return viewStyle;
   };
 
-  getSeparatorComponent = () => {
-    const {Separator} = ShowCardsListStyles;
-
-    return <Separator />;
-  };
-
   render() {
     const {List} = ShowCardsListStyles;
     const {status} = this.props;
@@ -199,7 +198,6 @@ export class ShowCardsList extends React.Component<Props, State> {
     return (
       <>
         <List
-          onLayout={ref => (this.pageSearchBarHeight = ref.nativeEvent.layout.height)}
           data={cards}
           keyExtractor={item => item.id.toString()}
           scrollEnabled={status !== ServiceStatus.loading}

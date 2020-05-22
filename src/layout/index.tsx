@@ -32,3 +32,53 @@ export class Layout extends React.PureComponent {
   }
 }
 
+// import React from "react";
+// import {createStackNavigator, StackNavigationProp} from "@react-navigation/stack";
+// import {NavigationContainer, useRoute, RouteProp} from "@react-navigation/native";
+// import {Button, Text, View} from "react-native";
+//
+// type RouteNames = {
+//   Home: {type1: string; type2: string};
+//   Details: {type3: string; type4: string};
+// };
+//
+// const Stack = createStackNavigator<RouteNames>();
+//
+// type HomeScreenNavigationProp = StackNavigationProp<RouteNames, "Home">;
+// type HomeScreenRouteProp = RouteProp<RouteNames, "Home">;
+//
+// type Props1 = {
+//   navigation: HomeScreenNavigationProp;
+//   route: HomeScreenRouteProp;
+// };
+//
+// class Home extends React.Component<Props1> {
+//   render() {
+//     const {type1} = this.props.route.params;
+//
+//     return (
+//       <View>
+//         <Button title={type1} onPress={() => this.props.navigation.navigate("Details")} />
+//       </View>
+//     );
+//   }
+// }
+//
+// const Details: React.FC = () => {
+//   const {params} = useRoute<RouteProp<RouteNames, "Details">>();
+//
+//   return (
+//     <View>
+//       <Text>{params.type3}</Text>
+//     </View>
+//   );
+// };
+//
+// export const Layout: React.FC = () => (
+//   <NavigationContainer>
+//     <Stack.Navigator>
+//       <Stack.Screen name="Home" component={Home} />
+//       <Stack.Screen name="Details" component={Details} />
+//     </Stack.Navigator>
+//   </NavigationContainer>
+// );

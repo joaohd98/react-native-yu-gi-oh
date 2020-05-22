@@ -31,7 +31,7 @@ export class ShowCardsListCard extends React.Component<Props> {
         <View style={style}>
           <Image
             isLoading={isLoading}
-            ref={ref => setRef(ref)}
+            setRef={ref => setRef(ref)}
             onPress={onOpenImage}
             resizeMode={"stretch"}
             source={{uri: cardContent?.getImage("small")}}
@@ -41,22 +41,7 @@ export class ShowCardsListCard extends React.Component<Props> {
               {cardContent?.name}
             </TextName>
             <TextName isLoading={isLoading} numberOfLines={1}>
-              {cardContent?.type}
-            </TextName>
-            <TextName isLoading={isLoading} numberOfLines={1}>
-              {cardContent?.race}
-            </TextName>
-            <TextName isLoading={isLoading} numberOfLines={1}>
-              {cardContent?.archetype}
-            </TextName>
-            <TextName isLoading={isLoading} numberOfLines={1}>
-              {cardContent?.atk} / {cardContent?.def}
-            </TextName>
-            <TextName isLoading={isLoading} numberOfLines={1}>
-              {cardContent?.level}
-            </TextName>
-            <TextName isLoading={isLoading} numberOfLines={1}>
-              {cardContent?.attribute}
+              ID: {cardContent?.id}
             </TextName>
           </ViewText>
           <ViewIcons>
