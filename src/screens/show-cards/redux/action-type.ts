@@ -5,6 +5,8 @@ import {ServiceStatus} from "../../../services/model";
 export enum ShowCardsScreenActionConst {
   fetchGetAllCards = "ShowCardsScreenActionConst@fetchGetAllCards",
   finishGetAllCards = "ShowCardsScreenActionConst@finishGetAllCards",
+  errorGetAllCards = "ShowCardsScreenActionConst@errorGetAllCards",
+  rehydrate = "persist/REHYDRATE",
 }
 
 interface FetchGetAllCards extends Action<ShowCardsScreenActionConst.fetchGetAllCards> {
@@ -16,4 +18,14 @@ interface FinishGetAllCards extends Action<ShowCardsScreenActionConst.finishGetA
   status: ServiceStatus;
 }
 
-export type ShowCardsScreenActionType = FetchGetAllCards | FinishGetAllCards;
+interface ErrorGetAllCards extends Action<ShowCardsScreenActionConst.errorGetAllCards> {
+  status: ServiceStatus;
+}
+
+interface RehydrateData extends Action<ShowCardsScreenActionConst.rehydrate> {}
+
+export type ShowCardsScreenActionType =
+  | FetchGetAllCards
+  | FinishGetAllCards
+  | ErrorGetAllCards
+  | RehydrateData;

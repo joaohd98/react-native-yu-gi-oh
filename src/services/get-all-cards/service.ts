@@ -15,7 +15,7 @@ export const getAllCards = async (): PromiseType => {
     GenericService.makePostRequest<AllCardsResponse[]>(URL.getAllCard, {}, headers).then(
       data =>
         resolve({
-          status: ServiceStatus.success,
+          status: data.status,
           response: data.response!.map(value => new AllCardsResponse(value)),
         }),
       error => reject(error)

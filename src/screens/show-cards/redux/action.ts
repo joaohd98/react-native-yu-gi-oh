@@ -16,4 +16,9 @@ export class ShowCardsScreenAction {
     status: service.status!,
     cards: service.response!,
   });
+
+  static cancelAllCard = (status: ServiceStatus): Response => ({
+    type: ShowCardsScreenActionConst.errorGetAllCards,
+    status,
+  });
 }

@@ -5,9 +5,12 @@ import {ShowCardsScreenActionConst} from "./action-type";
 
 // eslint-disable-next-line no-unused-vars,func-style
 function* getAllCards() {
-  const result = yield call(() => Services.getAllCard());
-
-  yield put(ShowCardsScreenAction.receiveAllCard(result));
+  try {
+    const result = yield call(() => Services.getAllCard());
+    yield put(ShowCardsScreenAction.receiveAllCard(result));
+  } catch (status) {
+    yield put(ShowCardsScreenAction.cancelAllCard(status.message));
+  }
 }
 
 export const ShowCardsScreenSaga = [

@@ -28,11 +28,13 @@ export class GenericService {
         method,
         url,
         headers,
+        timeout: 5000,
         data: method === "post" ? value : null,
         params: method === "get" ? value : null,
       });
 
       return {
+        status: ServiceStatus.success,
         response: response.data.data,
       };
     } catch {

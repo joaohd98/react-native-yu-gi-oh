@@ -33,7 +33,7 @@ export const ShowCardsListCardStyles = {
   `,
   TextName: styled(CustomText)<TextProps>`
     font-weight: 700;
-    font-size: 18px;
+    font-size: 14px;
     margin-vertical: 5px;
     padding-vertical: 3px;
   `,

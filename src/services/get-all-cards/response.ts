@@ -32,12 +32,11 @@ export class AllCardsResponse {
   def!: number;
   level!: number;
   race!: string;
+  archetype!: string;
   attribute!: string;
   card_sets!: CardSet[];
   card_images!: CardImage[];
   card_prices!: CardPrice[];
-  animated!: Animated.Value;
-  refImage!: Image;
 
   constructor(init: Partial<AllCardsResponse>) {
     Object.assign(this, init);
@@ -51,20 +50,6 @@ export class AllCardsResponse {
       return [0, 1, 2, 3, 4, 5].map(item => new AllCardsResponse({id: item}));
     } else {
       return successCards;
-    }
-  };
-
-  setAnimatedValue = (value: number, hasOverrideValue = false) => {
-    if (!this.animated) {
-      this.animated = new Animated.Value(value);
-    } else if (hasOverrideValue) {
-      this.animated.setValue(value);
-    }
-  };
-
-  setRefImage = (refImage: Image, hasOverrideValue = false) => {
-    if (!this.refImage || hasOverrideValue) {
-      this.refImage = refImage;
     }
   };
 

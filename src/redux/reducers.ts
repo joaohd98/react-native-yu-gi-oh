@@ -9,13 +9,13 @@ export interface StatesReducers {
 }
 
 const persistConfig = {
-  key: "root",
+  key: "ShowCardScreen",
   storage: AsyncStorage,
-  whitelist: [""],
+  whitelist: ["cards"],
 };
 
-const ShowCardScreenReducerRedcuer = persistReducer(persistConfig, ShowCardScreenReducer);
+const ShowCardScreenReducerReducer = persistReducer(persistConfig, ShowCardScreenReducer);
 
 export const Reducers = combineReducers({
-  ShowCardScreen: ShowCardScreenReducerRedcuer,
+  ShowCardScreen: ShowCardScreenReducerReducer,
 });

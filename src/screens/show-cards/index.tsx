@@ -13,6 +13,10 @@ export class ShowCards extends React.Component<ShowCardsScreenProps> {
     this.props.getAllCard();
   }
 
+  componentDidUpdate() {
+    console.log(this.props);
+  }
+
   render() {
     const {status, cards, limit} = this.props;
 

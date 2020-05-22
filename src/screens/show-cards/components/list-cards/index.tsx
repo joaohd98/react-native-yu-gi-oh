@@ -1,4 +1,4 @@
-import {Animated, Dimensions, View} from "react-native";
+import {Animated, Dimensions, Image, View} from "react-native";
 import React from "react";
 import {ViewAnimatedStyles} from "../../../../helpers/animated-types";
 import {ShowCardsListCard} from "../card";
@@ -13,6 +13,7 @@ interface Props {
 
 interface State {
   activeIndex: number | null;
+  cardsAnimations: Animated.Value[];
   fullImageAnimation: {
     opacity: Animated.Value;
     position: Animated.ValueXY;
@@ -23,6 +24,7 @@ interface State {
 export class ShowCardsList extends React.Component<Props, State> {
   state: State = {
     activeIndex: null,
+    cardsAnimations: [],
     fullImageAnimation: {
       opacity: new Animated.Value(0),
       position: new Animated.ValueXY({x: 0, y: 0}),
@@ -30,12 +32,13 @@ export class ShowCardsList extends React.Component<Props, State> {
     },
   };
 
+  listRefImage: Image[] = [];
   fullImageView: View | null = null;
   imageDimensions: {x: number; y: number; width: number; height: number} | null = null;
   pageSearchBarHeight = 0;
 
   handleOpenImage = (index: number) => {
-    const activeImage = this.props.cards[index].refImage;
+    const activeImage = this.listRefImage[index];
     const {position, size, opacity} = this.state.fullImageAnimation;
 
     activeImage.measure((x, y, width, height, pageX, pageY) => {
@@ -152,12 +155,13 @@ export class ShowCardsList extends React.Component<Props, State> {
   getAnimationStyle = (index: number) => {
     const isEven = index % 2 === 0;
     const width = (Dimensions.get("window").width / 2) * (isEven ? 1 : -1);
-    const cards = AllCardsResponse.isLoadingCards(this.props.status, this.props.cards);
+    const {cardsAnimations} = this.state;
+    let animated = cardsAnimations[index];
 
-    const card = cards[index];
-    card.setAnimatedValue(width);
-
-    const {animated} = card;
+    if (!cardsAnimations[index]) {
+      animated = new Animated.Value(width);
+      cardsAnimations[index] = animated;
+    }
 
     Animated.timing(animated, {
       toValue: 0,
@@ -197,12 +201,12 @@ export class ShowCardsList extends React.Component<Props, State> {
         <List
           onLayout={ref => (this.pageSearchBarHeight = ref.nativeEvent.layout.height)}
           data={cards}
+          keyExtractor={item => item.id.toString()}
           scrollEnabled={status !== ServiceStatus.loading}
           ItemSeparatorComponent={this.getSeparatorComponent}
           renderItem={({item, index}) => (
             <ShowCardsListCard
-              key={index.toString()}
-              setRef={ref => cards[index].setRefImage(ref)}
+              setRef={ref => (this.listRefImage[index] = ref)}
               style={this.getAnimationStyle(index)}
               onOpenImage={() => this.handleOpenImage(index)}
               isLoading={status === ServiceStatus.loading}
