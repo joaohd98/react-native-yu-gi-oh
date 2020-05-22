@@ -11,7 +11,7 @@ export interface StatesReducers {
 const persistConfig = {
   key: "root",
   storage: AsyncStorage,
-  whitelist: ["cards"],
+  whitelist: [""],
 };
 
 const ShowCardScreenReducerRedcuer = persistReducer(persistConfig, ShowCardScreenReducer);

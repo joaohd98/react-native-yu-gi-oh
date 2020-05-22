@@ -2,30 +2,18 @@ import React from "react";
 import {ViewAnimatedStyles} from "../../../../helpers/animated-types";
 import {ShowCardsListCardStyles} from "./styles";
 import {Image} from "react-native";
+import {AllCardsResponse} from "../../../../services/get-all-cards/response";
 
 interface Props {
   key: string;
-  image: string;
+  isLoading: boolean;
   style: ViewAnimatedStyles;
   setRef: (ref: Image) => void;
   onOpenImage: () => void;
+  cardContent?: AllCardsResponse;
 }
 
-interface State {
-  loading: boolean;
-}
-
-export class ShowCardsListCard extends React.Component<Props, State> {
-  state = {
-    loading: true,
-  };
-
-  async componentDidMount() {
-    setTimeout(() => {
-      this.setState({loading: false});
-    }, 1000);
-  }
-
+export class ShowCardsListCard extends React.Component<Props> {
   render() {
     const {
       Container,
@@ -37,28 +25,23 @@ export class ShowCardsListCard extends React.Component<Props, State> {
       IconButton,
       Icon,
     } = ShowCardsListCardStyles;
-
-    const {image, style, setRef, onOpenImage} = this.props;
+    const {style, isLoading, cardContent, setRef, onOpenImage} = this.props;
 
     return (
       <Container>
         <View style={style}>
           <Image
+            isLoading={isLoading}
             ref={ref => setRef(ref)}
-            isLoading={this.state.loading}
             onPress={onOpenImage}
             resizeMode={"stretch"}
-            source={{uri: image}}
+            source={{uri: cardContent?.getImage("small")}}
           />
           <ViewText>
-            <TextName isLoading={this.state.loading}>A Cell Breeding Device</TextName>
-            <TextName isLoading={this.state.loading}>A Cell Breeding Device</TextName>
-            <TextName>A Cell Breeding Device</TextName>
-            <TextName>A Cell Breeding Device</TextName>
-            <TextName>A Cell Breeding Device</TextName>
+            <TextName isLoading={isLoading}>{cardContent?.name}</TextName>
           </ViewText>
           <ViewIcons>
-            <IconButton>
+            <IconButton isLoading={true}>
               <Icon name={"info"} />
             </IconButton>
           </ViewIcons>

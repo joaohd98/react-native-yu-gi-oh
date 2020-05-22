@@ -1,16 +1,18 @@
-import {Animated, Dimensions, Image, View} from "react-native";
+import {Animated, Dimensions, View} from "react-native";
 import React from "react";
 import {ViewAnimatedStyles} from "../../../../helpers/animated-types";
 import {ShowCardsListCard} from "../card";
 import {ShowCardsListStyles} from "./styles";
+import {ServiceStatus} from "../../../../services/model";
+import {AllCardsResponse} from "../../../../services/get-all-cards/response";
 
 interface Props {
-  test?: undefined;
+  cards: AllCardsResponse[];
+  status: ServiceStatus;
 }
 
 interface State {
   activeIndex: number | null;
-  list: YuGiCard[];
   fullImageAnimation: {
     opacity: Animated.Value;
     position: Animated.ValueXY;
@@ -18,35 +20,8 @@ interface State {
   };
 }
 
-class YuGiCard {
-  key!: string;
-  image!: string;
-  animated!: Animated.Value;
-
-  constructor(index: number, image: string) {
-    const isEven = index % 2 === 0;
-    const width = (Dimensions.get("window").width / 2) * (isEven ? 1 : -1);
-
-    Object.assign(this, {
-      key: index.toString(),
-      animated: new Animated.Value(width),
-      image,
-    });
-  }
-}
-
-const lisssst = [
-  new YuGiCard(1, "https://ygoprodeck.com/pics/64163367.jpg"),
-  new YuGiCard(2, "https://ygoprodeck.com/pics/91231901.jpg"),
-  new YuGiCard(3, "https://ygoprodeck.com/pics/64163367.jpg"),
-  new YuGiCard(4, "https://ygoprodeck.com/pics/91231901.jpg"),
-  new YuGiCard(5, "https://ygoprodeck.com/pics/64163367.jpg"),
-  new YuGiCard(6, "https://ygoprodeck.com/pics/91231901.jpg"),
-];
-
 export class ShowCardsList extends React.Component<Props, State> {
   state: State = {
-    list: lisssst,
     activeIndex: null,
     fullImageAnimation: {
       opacity: new Animated.Value(0),
@@ -56,12 +31,11 @@ export class ShowCardsList extends React.Component<Props, State> {
   };
 
   fullImageView: View | null = null;
-  listImageRef: Image[] = [];
   imageDimensions: {x: number; y: number; width: number; height: number} | null = null;
-  pageSearchBarHeight: number = Dimensions.get("window").height;
+  pageSearchBarHeight = 0;
 
   handleOpenImage = (index: number) => {
-    const activeImage = this.listImageRef[index];
+    const activeImage = this.props.cards[index].refImage;
     const {position, size, opacity} = this.state.fullImageAnimation;
 
     activeImage.measure((x, y, width, height, pageX, pageY) => {
@@ -144,9 +118,11 @@ export class ShowCardsList extends React.Component<Props, State> {
       FullImageView,
       FullImage,
     } = ShowCardsListStyles;
-    const {list, activeIndex} = this.state;
+    const {cards} = this.props;
+    const {activeIndex} = this.state;
     const {size, position, opacity} = this.state.fullImageAnimation;
-    const image = activeIndex !== null ? {uri: list[activeIndex].image} : undefined;
+    const image =
+      activeIndex !== null ? {uri: cards[activeIndex].card_images[0].image_url_small} : undefined;
 
     const viewStyle = {
       opacity: opacity,
@@ -176,7 +152,12 @@ export class ShowCardsList extends React.Component<Props, State> {
   getAnimationStyle = (index: number) => {
     const isEven = index % 2 === 0;
     const width = (Dimensions.get("window").width / 2) * (isEven ? 1 : -1);
-    const {animated} = this.state.list[index];
+    const cards = AllCardsResponse.isLoadingCards(this.props.status, this.props.cards);
+
+    const card = cards[index];
+    card.setAnimatedValue(width);
+
+    const {animated} = card;
 
     Animated.timing(animated, {
       toValue: 0,
@@ -208,21 +189,24 @@ export class ShowCardsList extends React.Component<Props, State> {
 
   render() {
     const {List} = ShowCardsListStyles;
-    const {list} = this.state;
+    const {status} = this.props;
+    const cards = AllCardsResponse.isLoadingCards(status, this.props.cards);
 
     return (
       <>
         <List
           onLayout={ref => (this.pageSearchBarHeight = ref.nativeEvent.layout.height)}
-          data={list}
+          data={cards}
+          scrollEnabled={status !== ServiceStatus.loading}
           ItemSeparatorComponent={this.getSeparatorComponent}
           renderItem={({item, index}) => (
             <ShowCardsListCard
-              key={item.key}
-              image={item.image}
-              onOpenImage={() => this.handleOpenImage(index)}
-              setRef={ref => (this.listImageRef[index] = ref)}
+              key={index.toString()}
+              setRef={ref => cards[index].setRefImage(ref)}
               style={this.getAnimationStyle(index)}
+              onOpenImage={() => this.handleOpenImage(index)}
+              isLoading={status === ServiceStatus.loading}
+              cardContent={item}
             />
           )}
         />

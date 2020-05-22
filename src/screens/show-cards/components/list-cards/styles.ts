@@ -11,14 +11,10 @@ import {
 import Icon from "react-native-vector-icons/FontAwesome";
 import {HelperStyles} from "../../../../helpers/styles";
 import {ImageAnimatedStyles} from "../../../../helpers/animated-types";
-
-type Props = {
-  key: string;
-  image: string;
-};
+import {AllCardsResponse} from "../../../../services/get-all-cards/response";
 
 export const ShowCardsListStyles = {
-  List: styled(FlatList)<FlatListProps<Props>>`
+  List: styled(FlatList)<FlatListProps<AllCardsResponse>>`
     height: 100%;
   `,
   Separator: styled.View<ViewProps>`

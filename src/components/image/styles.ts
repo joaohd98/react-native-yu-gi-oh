@@ -3,10 +3,6 @@ import {Animated, TouchableOpacityProps} from "react-native";
 import {ImageAnimatedStyles} from "../../helpers/animated-types";
 
 export const CustomImageStyle = {
-  TouchableOpacity: styled.TouchableOpacity<TouchableOpacityProps>`
-    
-  `,
-  Image: styled(Animated.Image)<ImageAnimatedStyles>`
-  
-  `
-}
+  TouchableOpacity: styled.TouchableOpacity<TouchableOpacityProps>``,
+  Image: styled(Animated.Image)<ImageAnimatedStyles>``,
+};

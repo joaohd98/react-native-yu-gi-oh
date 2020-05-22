@@ -6,6 +6,7 @@ import {Colors} from "../../../../theme/colors";
 import {IconAnimatedStyles, ViewAnimatedStyles} from "../../../../helpers/animated-types";
 import {CustomText} from "../../../../components/text";
 import {CustomImage} from "../../../../components/image";
+import {CustomButton} from "../../../../components/button";
 
 const AnimatedIcon = Animated.createAnimatedComponent(Icon);
 
@@ -42,7 +43,7 @@ export const ShowCardsListCardStyles = {
     justify-content: flex-end;
     padding: 5px;
   `,
-  IconButton: styled.TouchableOpacity<TouchableOpacityProps>`
+  IconButton: styled(CustomButton)<TouchableOpacityProps>`
     width: 40px;
     height: 40px;
     border: 1px solid ${Colors.white};

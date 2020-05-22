@@ -14,10 +14,12 @@ export class ShowCards extends React.Component<ShowCardsScreenProps> {
   }
 
   render() {
+    const {status, cards, limit} = this.props;
+
     return (
       <View>
         <ShowCardsInputSearch />
-        <ShowCardsList />
+        <ShowCardsList status={status} cards={cards.slice(0, limit)} />
       </View>
     );
   }

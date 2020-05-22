@@ -1,5 +1,5 @@
 import React from "react";
-import {Animated, ImageProps, TouchableOpacity, TouchableOpacityProps} from "react-native";
+import {Animated, ImageProps, TouchableOpacity} from "react-native";
 import {HelperStyles} from "../../helpers/styles";
 import {Colors} from "../../theme/colors";
 import {TextAnimatedStyles, ViewAnimatedStyles} from "../../helpers/animated-types";
