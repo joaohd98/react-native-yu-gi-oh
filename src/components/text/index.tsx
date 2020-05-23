@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  Animated,
-  TextProps,
-  TextStyle,
-} from "react-native";
+import {Animated, TextProps, TextStyle} from "react-native";
 import {Colors} from "../../theme/colors";
 import {TextAnimatedStyles} from "../../helpers/animated-types";
 import {HelperStyles} from "../../helpers/styles";
@@ -23,19 +19,23 @@ export class CustomText extends React.Component<Props, State> {
 
   componentDidMount() {
     if (!this.props.isLoading) {
-      this.state.animation.setValue(1);
+      this.initAnimation();
     }
   }
 
   componentDidUpdate(prevProps: Readonly<Props>) {
     if (prevProps.isLoading && !this.props.isLoading) {
-      Animated.timing(this.state.animation, {
-        toValue: 1,
-        duration: 500,
-        useNativeDriver: false,
-      }).start();
+      this.initAnimation();
     }
   }
+
+  initAnimation = () => {
+    Animated.timing(this.state.animation, {
+      toValue: 1,
+      duration: 500,
+      useNativeDriver: false,
+    }).start();
+  };
 
   render() {
     const {getPropertyOfStyle} = HelperStyles;

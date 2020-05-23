@@ -13,17 +13,43 @@ interface Props {
 }
 
 export class ShowCardsListCard extends React.Component<Props> {
-  render() {
+  renderTypeRow = () => {
     const {
-      Container,
-      View,
-      Image,
       ViewText,
       TextName,
-      ViewIcons,
-      IconButton,
-      Icon,
+      TextID,
+      ViewTypeCard,
+      ImageType,
+      TextType,
+      ImageEquip,
     } = ShowCardsListCardStyles;
+    const {isLoading, cardContent} = this.props;
+    const attributeImage = {uri: cardContent?.getAttributeImage()};
+    const raceImage = {uri: cardContent?.getRaceImage()};
+
+    return (
+      <ViewText>
+        <TextName isLoading={isLoading} numberOfLines={1}>
+          {cardContent?.name}
+        </TextName>
+        <TextID isLoading={isLoading} numberOfLines={1}>
+          ID: {cardContent?.id}
+        </TextID>
+        <ViewTypeCard>
+          <ImageType
+            isLoading={isLoading}
+            source={{uri: cardContent?.getTypeImage()}}
+            resizeMode={"contain"}
+          />
+          <TextType isLoading={isLoading}>{cardContent?.type}</TextType>
+          <ImageEquip isLoading={isLoading} source={attributeImage} resizeMode={"contain"} />
+          <ImageEquip isLoading={isLoading} source={raceImage} resizeMode={"contain"} />
+        </ViewTypeCard>
+      </ViewText>
+    );
+  };
+  render() {
+    const {Container, View, Image, IconButton, Icon} = ShowCardsListCardStyles;
     const {style, isLoading, cardContent, setRef, onOpenImage} = this.props;
 
     return (
@@ -36,19 +62,10 @@ export class ShowCardsListCard extends React.Component<Props> {
             resizeMode={"stretch"}
             source={{uri: cardContent?.getImage("small")}}
           />
-          <ViewText>
-            <TextName isLoading={isLoading} numberOfLines={1}>
-              {cardContent?.name}
-            </TextName>
-            <TextName isLoading={isLoading} numberOfLines={1}>
-              ID: {cardContent?.id}
-            </TextName>
-          </ViewText>
-          <ViewIcons>
-            <IconButton isLoading={isLoading}>
-              <Icon name={"info"} />
-            </IconButton>
-          </ViewIcons>
+          {this.renderTypeRow()}
+          <IconButton isLoading={isLoading}>
+            <Icon name={"info"} />
+          </IconButton>
         </View>
       </Container>
     );

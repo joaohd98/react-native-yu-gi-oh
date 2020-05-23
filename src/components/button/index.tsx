@@ -20,19 +20,24 @@ export class CustomButton extends React.Component<Props> {
 
   componentDidMount() {
     if (!this.props.isLoading) {
-      this.state.animation.setValue(1);
+      this.initAnimation();
     }
   }
 
   componentDidUpdate(prevProps: Readonly<Props>) {
     if (prevProps.isLoading && !this.props.isLoading) {
-      Animated.timing(this.state.animation, {
-        toValue: 1,
-        duration: 500,
-        useNativeDriver: false,
-      }).start();
+      this.initAnimation();
     }
   }
+
+  initAnimation = () => {
+    Animated.timing(this.state.animation, {
+      toValue: 1,
+      duration: 500,
+      useNativeDriver: false,
+    }).start();
+  };
+
   render() {
     const {getPropertyOfStyle} = HelperStyles;
     const {Button} = CustomButtonStyle;

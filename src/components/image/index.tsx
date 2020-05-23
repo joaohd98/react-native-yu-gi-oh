@@ -10,6 +10,7 @@ interface Props extends ImageProps {
   activeOpacity?: number;
   isLoading?: boolean;
   setRef?: (ref: Image) => void;
+  hasNoImage?: boolean;
 }
 
 interface State {
@@ -25,8 +26,9 @@ export class CustomImage extends React.Component<Props, State> {
 
   componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>) {
     const hasLoaded = !prevState.hasLoad && this.state.hasLoad;
+    const hasImage = JSON.stringify(this.props.source).indexOf("undefined") > -1;
 
-    if (!this.props.isLoading && hasLoaded) {
+    if (!this.props.isLoading && (hasLoaded || !hasImage)) {
       Animated.timing(this.state.animation, {
         toValue: 1,
         duration: 500,
@@ -63,7 +65,7 @@ export class CustomImage extends React.Component<Props, State> {
       onPress: this.props.onPress,
       activeOpacity: this.props.isLoading ? 1 : this.props.activeOpacity,
       disabled: this.props.isLoading,
-      style: touchableAnimation,
+      style: [style, touchableAnimation],
     };
 
     const imageProps = {

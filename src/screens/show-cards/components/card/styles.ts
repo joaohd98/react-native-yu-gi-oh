@@ -35,15 +35,40 @@ export const ShowCardsListCardStyles = {
     font-weight: 700;
     font-size: 14px;
     height: 15px;
-    margin-vertical: 7.5px;
+    margin-top: 10px;
+    margin-bottom: 20px;
   `,
-  ViewIcons: styled.View<ViewProps>`
+  TextID: styled(CustomText)<TextProps>`
+    font-weight: 600;
+    font-size: 12px;
+    height: 15px;
+    margin-bottom: 20px;
+  `,
+  ViewTypeCard: styled.View<ViewProps>`
     display: flex;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
-    justify-content: flex-end;
-    padding: 5px;
+  `,
+  ImageType: styled(CustomImage)<ImageProps>`
+    height: 30px;
+    width: 25px;
+  `,
+  TextType: styled(CustomText)<TextProps>`
+    flex: 1;
+    margin-horizontal: 5px;
+    font-size: 14px;
+  `,
+  ImageEquip: styled(CustomImage)<ImageProps>`
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
+    margin-right: 10px;
   `,
   IconButton: styled(CustomButton)<TouchableOpacityProps>`
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
     width: 40px;
     height: 40px;
     border: 1px solid ${Colors.white};

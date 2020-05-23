@@ -202,6 +202,7 @@ export class ShowCardsList extends React.Component<Props, State> {
           keyExtractor={item => item.id.toString()}
           scrollEnabled={status !== ServiceStatus.loading}
           ItemSeparatorComponent={this.getSeparatorComponent}
+          ListHeaderComponent={this.getSeparatorComponent}
           renderItem={({item, index}) => (
             <ShowCardsListCard
               setRef={ref => (this.listRefImage[index] = ref)}
