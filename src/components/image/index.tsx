@@ -39,7 +39,7 @@ export class CustomImage extends React.Component<Props, State> {
 
   render() {
     const {TouchableOpacity, Image} = CustomImageStyle;
-    const {style, setRef} = this.props;
+    const {style, setRef, isLoading, onPress} = this.props;
     const background = HelperStyles.getPropertyOfStyle<string>(
       style,
       "backgroundColor",
@@ -63,8 +63,8 @@ export class CustomImage extends React.Component<Props, State> {
 
     const touchableOpacityProps = {
       onPress: this.props.onPress,
-      activeOpacity: this.props.isLoading ? 1 : this.props.activeOpacity,
-      disabled: this.props.isLoading,
+      activeOpacity: isLoading || onPress === undefined ? 1 : this.props.activeOpacity,
+      disabled: isLoading,
       style: [style, touchableAnimation],
     };
 

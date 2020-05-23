@@ -3,6 +3,7 @@ import {ViewAnimatedStyles} from "../../../../helpers/animated-types";
 import {ShowCardsListCardStyles} from "./styles";
 import {Image} from "react-native";
 import {AllCardsResponse} from "../../../../services/get-all-cards/response";
+import {images} from "../../../../theme/images";
 
 interface Props {
   isLoading: boolean;
@@ -15,41 +16,62 @@ interface Props {
 export class ShowCardsListCard extends React.Component<Props> {
   renderTypeRow = () => {
     const {
-      ViewText,
+      ViewNameLevel,
       TextName,
-      TextID,
+      ViewLevel,
+      ImageLevel,
+      TextLevel,
       ViewTypeCard,
       ImageType,
       TextType,
       ImageEquip,
+      TextAtkDef,
     } = ShowCardsListCardStyles;
     const {isLoading, cardContent} = this.props;
     const attributeImage = {uri: cardContent?.getAttributeImage()};
     const raceImage = {uri: cardContent?.getRaceImage()};
 
     return (
-      <ViewText>
-        <TextName isLoading={isLoading} numberOfLines={1}>
-          {cardContent?.name}
-        </TextName>
-        <TextID isLoading={isLoading} numberOfLines={1}>
-          ID: {cardContent?.id}
-        </TextID>
+      <>
+        <ViewNameLevel>
+          <TextName isLoading={isLoading} numberOfLines={1}>
+            {cardContent?.name}
+          </TextName>
+          <ViewLevel>
+            {(cardContent?.level !== undefined || isLoading) && (
+              <>
+                <ImageLevel
+                  isLoading={isLoading}
+                  source={cardContent?.level ? images.level : {uri: undefined}}
+                />
+                <TextLevel isLoading={isLoading}>{cardContent?.level}</TextLevel>
+              </>
+            )}
+          </ViewLevel>
+        </ViewNameLevel>
         <ViewTypeCard>
           <ImageType
             isLoading={isLoading}
             source={{uri: cardContent?.getTypeImage()}}
             resizeMode={"contain"}
           />
-          <TextType isLoading={isLoading}>{cardContent?.type}</TextType>
-          <ImageEquip isLoading={isLoading} source={attributeImage} resizeMode={"contain"} />
-          <ImageEquip isLoading={isLoading} source={raceImage} resizeMode={"contain"} />
+          <TextType numberOfLines={1} isLoading={isLoading}>
+            {cardContent?.type}
+          </TextType>
+          {(cardContent?.attribute !== undefined || isLoading) && (
+            <ImageEquip isLoading={isLoading} source={attributeImage} resizeMode={"contain"} />
+          )}
+          {(cardContent?.race !== undefined || isLoading) && (
+            <ImageEquip isLoading={isLoading} source={raceImage} resizeMode={"contain"} />
+          )}
         </ViewTypeCard>
-      </ViewText>
+        <TextAtkDef isLoading={isLoading}>{cardContent?.getAtkDefText()}</TextAtkDef>
+      </>
     );
   };
+
   render() {
-    const {Container, View, Image, IconButton, Icon} = ShowCardsListCardStyles;
+    const {Container, View, Image, IconButton, ViewContent, Icon} = ShowCardsListCardStyles;
     const {style, isLoading, cardContent, setRef, onOpenImage} = this.props;
 
     return (
@@ -60,9 +82,9 @@ export class ShowCardsListCard extends React.Component<Props> {
             setRef={ref => setRef(ref)}
             onPress={onOpenImage}
             resizeMode={"stretch"}
-            source={{uri: cardContent?.getImage("small")}}
+            source={{uri: cardContent?.getImage("big")}}
           />
-          {this.renderTypeRow()}
+          <ViewContent>{this.renderTypeRow()}</ViewContent>
           <IconButton isLoading={isLoading}>
             <Icon name={"info"} />
           </IconButton>

@@ -2,6 +2,7 @@ import {Animated, Image} from "react-native";
 import {ServiceStatus} from "../model";
 import * as https from "https";
 import {HelperText} from "../../helpers/text";
+import index from "@react-native-community/masked-view";
 
 export interface CardSet {
   set_name: string;
@@ -76,5 +77,13 @@ export class AllCardsResponse {
     if (!this.race) return undefined;
 
     return `https://ygoprodeck.com/pics/icons/race/${this.race}.png`;
+  };
+
+  getAtkDefText = (): string | undefined => {
+    if (this.atk && this.def) {
+      return `ATK/ ${this.atk} DEF/ ${this.def}`;
+    } else {
+      return undefined;
+    }
   };
 }
