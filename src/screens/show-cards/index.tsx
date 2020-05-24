@@ -23,13 +23,18 @@ export class ShowCards extends React.Component<ShowCardsScreenProps, ShowCardsSc
   }
 
   render() {
-    const {status, cards, limit} = this.props;
+    const {status, cards, limit, addLimitCard, offset} = this.props;
     const {screenHeight} = this.state;
 
     return (
       <Container onLayout={event => this.setState({screenHeight: event.nativeEvent.layout.height})}>
         <ShowCardsInputSearch />
-        <ShowCardsList status={status} cards={cards.slice(0, limit)} screenHeight={screenHeight} />
+        <ShowCardsList
+          status={status}
+          cards={cards.slice(0, limit)}
+          screenHeight={screenHeight}
+          addCardsLimit={() => addLimitCard(limit, offset)}
+        />
       </Container>
     );
   }
@@ -41,6 +46,7 @@ const mapStateToProps = (state: StatesReducers): ShowCardsScreenProps => ({
 
 const mapDispatchToProps = (dispatch: Dispatch): ShowCardsScreenPropsActions => ({
   getAllCard: bindActionCreators(ShowCardScreenInitial.getAllCard, dispatch),
+  addLimitCard: bindActionCreators(ShowCardScreenInitial.addLimitCard, dispatch),
 });
 
 export const ShowCardsScreen = connect(mapStateToProps, mapDispatchToProps)(ShowCards);

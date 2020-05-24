@@ -3,7 +3,7 @@ import {Colors} from "../../../../theme/colors";
 import {
   Animated,
   FlatList,
-  FlatListProps,
+  FlatListProps, ImageProps,
   TextProps,
   TouchableOpacityProps,
   ViewProps,
@@ -12,6 +12,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import {HelperStyles} from "../../../../helpers/styles";
 import {ImageAnimatedStyles} from "../../../../helpers/animated-types";
 import {AllCardsResponse} from "../../../../services/get-all-cards/response";
+import {CustomImage} from "../../../../components/image";
 
 export const ShowCardsListStyles = {
   List: styled(FlatList)<FlatListProps<AllCardsResponse>>`
@@ -49,5 +50,14 @@ export const ShowCardsListStyles = {
     position: absolute;
     top: 0;
     left: 0;
+  `,
+  ViewFooter: styled.View<ViewProps>`
+    flex-direction: row;
+    margin-top: 50px;
+    justify-content: center;
+  `,
+  ImageFooter: styled(Animated.Image)<ImageProps>`
+    width: 32px;
+    height: 32px;
   `,
 };

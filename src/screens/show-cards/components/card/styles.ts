@@ -46,7 +46,6 @@ export const ShowCardsListCardStyles = {
   `,
   ImageLevel: styled(CustomImage).attrs(() => ({
     styleView: {
-      marginHorizontal: 5,
       borderRadius: 30,
     },
   }))<ImageProps>`
@@ -59,7 +58,7 @@ export const ShowCardsListCardStyles = {
     font-size: 20px;
     line-height: 20px;
     font-weight: 700;
-    margin-left: 2px;
+    margin-left: 5px;
     height: 20px;
     width: 23px;
     text-align: center;

@@ -6,6 +6,7 @@ export enum ShowCardsScreenActionConst {
   fetchGetAllCards = "ShowCardsScreenActionConst@fetchGetAllCards",
   finishGetAllCards = "ShowCardsScreenActionConst@finishGetAllCards",
   errorGetAllCards = "ShowCardsScreenActionConst@errorGetAllCards",
+  addLimitCards = "ShowCardsScreenActionConst@addLimitCards",
   rehydrate = "persist/REHYDRATE",
 }
 
@@ -22,10 +23,16 @@ interface ErrorGetAllCards extends Action<ShowCardsScreenActionConst.errorGetAll
   status: ServiceStatus;
 }
 
+interface AddLimitCards extends Action<ShowCardsScreenActionConst.addLimitCards> {
+  limit: number;
+  offset: number;
+}
+
 interface RehydrateData extends Action<ShowCardsScreenActionConst.rehydrate> {}
 
 export type ShowCardsScreenActionType =
   | FetchGetAllCards
   | FinishGetAllCards
   | ErrorGetAllCards
-  | RehydrateData;
+  | RehydrateData
+  | AddLimitCards;

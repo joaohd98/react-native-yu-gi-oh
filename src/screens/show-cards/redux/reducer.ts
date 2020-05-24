@@ -8,10 +8,11 @@ import {AllCardsResponse} from "../../../services/get-all-cards/response";
 
 export const ShowCardScreenInitial: ShowCardsScreenProps = {
   cards: [],
-  status: ServiceStatus.success,
+  status: ServiceStatus.loading,
   limit: 10,
   offset: 10,
   getAllCard: () => ShowCardsScreenAction.getAllCard(),
+  addLimitCard: (limit, offset) => ShowCardsScreenAction.addLimitCard(limit, offset),
 };
 
 export const ShowCardScreenReducer: Reducer<ShowCardsScreenProps, ShowCardsScreenActionType> = (
@@ -38,6 +39,13 @@ export const ShowCardScreenReducer: Reducer<ShowCardsScreenProps, ShowCardsScree
       return {
         ...state,
         status: state.cards.length > 0 ? ServiceStatus.success : action.status,
+      };
+    }
+
+    case ShowCardsScreenActionConst.addLimitCards: {
+      return {
+        ...state,
+        limit: action.limit + action.offset,
       };
     }
 

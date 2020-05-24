@@ -3,6 +3,7 @@ import {ServiceStatus} from "../../../services/model";
 
 export interface ShowCardsScreenPropsActions {
   getAllCard: () => void;
+  addLimitCard: (limit: number, offset: number) => void;
 }
 
 export interface ShowCardsScreenProps extends ShowCardsScreenPropsActions {

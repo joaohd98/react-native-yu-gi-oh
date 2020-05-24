@@ -21,4 +21,10 @@ export class ShowCardsScreenAction {
     type: ShowCardsScreenActionConst.errorGetAllCards,
     status,
   });
+
+  static addLimitCard = (limit: number, offset: number): Response => ({
+    type: ShowCardsScreenActionConst.addLimitCards,
+    limit,
+    offset,
+  });
 }
