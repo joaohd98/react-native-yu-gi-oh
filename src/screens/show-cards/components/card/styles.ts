@@ -38,16 +38,21 @@ export const ShowCardsListCardStyles = {
     flex: 1;
     font-weight: 700;
     font-size: 14px;
-    height: 15px;
+    height: 18px;
     margin-right: 10px;
   `,
   ViewLevel: styled.View<ViewProps>`
     flex-direction: row;
   `,
-  ImageLevel: styled(CustomImage)<ImageProps>`
+  ImageLevel: styled(CustomImage).attrs(() => ({
+    styleView: {
+      marginHorizontal: 5,
+      borderRadius: 30,
+    },
+  }))<ImageProps>`
     width: 18px;
     height: 18px;
-    border-radius: 15px;
+    border-radius: 30px;
     margin-right: 2px;
   `,
   TextLevel: styled(CustomText)<TextProps>`
@@ -75,10 +80,14 @@ export const ShowCardsListCardStyles = {
     font-size: 14px;
     margin-left: 5px;
   `,
-  ImageEquip: styled(CustomImage)<ImageProps>`
+  ImageEquip: styled(CustomImage).attrs(() => ({
+    styleView: {
+      marginLeft: 5,
+      borderRadius: 20,
+    },
+  }))<ImageProps>`
     height: 30px;
     width: 30px;
-    margin-left: 5px;
     border-radius: 20px;
   `,
   TextAtkDef: styled(CustomText)<TextProps>`

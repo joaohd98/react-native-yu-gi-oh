@@ -11,6 +11,7 @@ interface Props extends ImageProps {
   isLoading?: boolean;
   setRef?: (ref: Image) => void;
   hasNoImage?: boolean;
+  styleView?: ViewAnimatedStyles;
 }
 
 interface State {
@@ -39,7 +40,7 @@ export class CustomImage extends React.Component<Props, State> {
 
   render() {
     const {TouchableOpacity, Image} = CustomImageStyle;
-    const {style, setRef, isLoading, onPress} = this.props;
+    const {style, styleView, setRef, isLoading, onPress} = this.props;
     const background = HelperStyles.getPropertyOfStyle<string>(
       style,
       "backgroundColor",
@@ -65,7 +66,7 @@ export class CustomImage extends React.Component<Props, State> {
       onPress: this.props.onPress,
       activeOpacity: isLoading || onPress === undefined ? 1 : this.props.activeOpacity,
       disabled: isLoading,
-      style: [style, touchableAnimation],
+      style: [touchableAnimation, styleView],
     };
 
     const imageProps = {
