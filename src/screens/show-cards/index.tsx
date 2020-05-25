@@ -1,6 +1,5 @@
 import React from "react";
 import {connect} from "react-redux";
-import {View} from "react-native";
 import {ShowCardsInputSearch} from "./components/input-search";
 import {ShowCardsList} from "./components/list-cards";
 import {StatesReducers} from "../../redux/reducers";

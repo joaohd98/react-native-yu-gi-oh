@@ -129,12 +129,14 @@ export class ShowCardsList extends React.Component<Props, State> {
       cardsAnimations[index] = animated;
     }
 
-    Animated.timing(animated, {
-      toValue: 0,
-      duration: 200,
-      delay: 100 * index,
-      useNativeDriver: true,
-    }).start();
+    Animated.sequence([
+      Animated.delay(50 * index),
+      Animated.timing(animated, {
+        toValue: 0,
+        duration: 200,
+        useNativeDriver: true,
+      }),
+    ]).start();
 
     const viewStyle: ViewAnimatedStyles = {
       opacity: animated.interpolate({
