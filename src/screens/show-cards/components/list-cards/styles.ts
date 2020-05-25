@@ -1,18 +1,7 @@
 import styled from "styled-components/native";
 import {Colors} from "../../../../theme/colors";
-import {
-  Animated,
-  FlatList,
-  FlatListProps, ImageProps,
-  TextProps,
-  TouchableOpacityProps,
-  ViewProps,
-} from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
-import {HelperStyles} from "../../../../helpers/styles";
-import {ImageAnimatedStyles} from "../../../../helpers/animated-types";
+import {Animated, FlatList, FlatListProps, ImageProps, ViewProps} from "react-native";
 import {AllCardsResponse} from "../../../../services/get-all-cards/response";
-import {CustomImage} from "../../../../components/image";
 
 export const ShowCardsListStyles = {
   List: styled(FlatList)<FlatListProps<AllCardsResponse>>`
@@ -23,33 +12,20 @@ export const ShowCardsListStyles = {
     width: 100%;
     background-color: ${Colors.grayLight};
   `,
-  FullImageContainer: styled(Animated.View)<ViewProps>`
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    align-items: center;
-    background-color: ${Colors.transparentBlack};
+  ViewError: styled.View<ViewProps>`
+    justify-content: center;
+    padding: 20px;
+    margin: 30px 20px;
+    border: 1.5px solid ${Colors.red};
   `,
-  FullImageButton: styled.TouchableOpacity<TouchableOpacityProps>`
-    position: absolute;
-    top: 20px;
-    right: 20px;
+  TextTitleError: styled.Text<ViewProps>`
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
   `,
-  FullImageIcon: styled(Icon)<TextProps>`
-    font-size: 40px;
-    color: ${Colors.white};
-  `,
-  FullImageView: styled.View<ViewProps>`
-    top: 0;
-    width: ${HelperStyles.getPercentSizePage("width", 90)};
-    height: ${HelperStyles.getPercentSizePage("height", 90)};
-  `,
-  FullImage: styled(Animated.Image)<ImageAnimatedStyles>`
-    position: absolute;
-    top: 0;
-    left: 0;
+  TextMessageError: styled.Text<ViewProps>`
+    font-size: 17px;
+    font-weight: 500;
   `,
   ViewFooter: styled.View<ViewProps>`
     flex-direction: row;

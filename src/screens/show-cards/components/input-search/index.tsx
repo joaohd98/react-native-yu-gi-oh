@@ -29,7 +29,7 @@ export class ShowCardsInputSearch extends React.Component<Props, State> {
   state: State = {
     blurFocusAnimation: new Animated.Value(0),
     hasInputFocus: false,
-    inputText: "",
+    inputText: this.props.text,
     inputLayout: undefined,
     placeholderFalseLayout: undefined,
   };
@@ -84,6 +84,7 @@ export class ShowCardsInputSearch extends React.Component<Props, State> {
 
     const placeholderLeftValue = (widthInput - widthPlaceholder) / 2;
     const placeholder = "Search for your card...";
+
     const inputStyle: InputAnimatedStyles = {
       paddingRight: blurFocusAnimation.interpolate({
         inputRange: [0, 1],

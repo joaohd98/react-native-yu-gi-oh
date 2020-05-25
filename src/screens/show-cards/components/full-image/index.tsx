@@ -2,6 +2,7 @@ import React from "react";
 import {Animated, Dimensions, Image, View} from "react-native";
 import {ShowCardsListStyles} from "../list-cards/styles";
 import {AllCardsResponse} from "../../../../services/get-all-cards/response";
+import {ShowCardsFullImageStyles} from "./styles";
 
 interface Props {
   card?: AllCardsResponse;
@@ -113,7 +114,7 @@ export class ShowCardsFullImage extends React.Component<Props, State> {
       FullImageIcon,
       FullImageView,
       FullImage,
-    } = ShowCardsListStyles;
+    } = ShowCardsFullImageStyles;
     const {size, position, opacity} = this.state;
     const {card} = this.props;
     const image = card ? {uri: card.getImage("big")} : undefined;

@@ -86,7 +86,7 @@ export class ShowCardsListCard extends React.Component<Props> {
           />
           <ViewContent>{this.renderTypeRow()}</ViewContent>
           <IconButton isLoading={isLoading}>
-            <Icon name={"info"} />
+            <Icon name={"plus"} />
           </IconButton>
         </View>
       </Container>

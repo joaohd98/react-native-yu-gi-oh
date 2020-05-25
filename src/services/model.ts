@@ -1,7 +1,7 @@
 export enum ServiceStatus {
   noAction = "noAction",
   exception = "exception",
-  noInternetConnection = "noInternetConnection",
+  noInternet = "noInternet",
   loading = "loading",
   success = "success",
 }

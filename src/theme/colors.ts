@@ -4,6 +4,7 @@ export const Colors = {
   grayDark: "rgb(156, 156, 156)",
   white: "rgb(255, 255, 255)",
   blue: "rgb(6,69,173)",
+  red: "rgb(255,0,0)",
   black: "rgb(0, 0, 0)",
   backgroundColor: "rgb(242, 242, 242)",
   transparentBlack: "rgba(0, 0, 0, 0.7)",

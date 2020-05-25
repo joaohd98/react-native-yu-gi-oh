@@ -41,7 +41,7 @@ export class GenericService {
       const fetch = await NetInfo.fetch();
 
       throw new ServiceStatusException(
-        fetch.isConnected ? ServiceStatus.exception : ServiceStatus.noInternetConnection
+        fetch.isConnected ? ServiceStatus.exception : ServiceStatus.noInternet
       );
     }
   };

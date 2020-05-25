@@ -99,13 +99,14 @@ export const ShowCardsListCardStyles = {
     bottom: 10px;
     width: 40px;
     height: 40px;
-    border: 1px solid ${Colors.white};
+    border: 3px solid ${Colors.white};
     border-radius: 50px;
     align-items: center;
     justify-content: center;
-    background-color: ${Colors.white};
+    background-color: ${Colors.grayDark};
   `,
   Icon: styled(AnimatedIcon)<IconAnimatedStyles>`
     font-size: 20px;
+    color: ${Colors.white};
   `,
 };

@@ -1,4 +1,4 @@
-import {Animated, Dimensions, Image} from "react-native";
+import {Animated, Dimensions, FlatList, Image} from "react-native";
 import React from "react";
 import {ViewAnimatedStyles} from "../../../../helpers/animated-types";
 import {ShowCardsListCard} from "../card";
@@ -7,7 +7,6 @@ import {ServiceStatus} from "../../../../services/model";
 import {AllCardsResponse} from "../../../../services/get-all-cards/response";
 import {images} from "../../../../theme/images";
 import {ShowCardsFullImage} from "../full-image";
-import {FlatList} from "react-native";
 
 interface Props {
   cards: AllCardsResponse[];
@@ -16,7 +15,7 @@ interface Props {
   screenHeight: number;
   addCardsLimit: () => void;
   hasMoreToLoad: boolean;
-  searchText: string
+  searchText: string;
 }
 
 interface State {
@@ -58,6 +57,35 @@ export class ShowCardsList extends React.Component<Props, State> {
     const {Separator} = ShowCardsListStyles;
 
     return <Separator />;
+  };
+
+  getEmptyComponent = () => {
+    const {status} = this.props;
+    const {ViewError, TextTitleError, TextMessageError} = ShowCardsListStyles;
+
+    const titleExceptionOrNoInternet = "It was not possible to get the cards";
+    const titleNoResultFound = "There is not result with this search";
+
+    const messageException = "We deeply sorry for that, try again later";
+    const messageNoInternet = "Check yor internet connection and try again later";
+    const messageNoResultFound = "Try to search with a different word";
+
+    return (
+      <ViewError>
+        <TextTitleError>
+          {status === ServiceStatus.exception || status === ServiceStatus.noInternet
+            ? titleExceptionOrNoInternet
+            : titleNoResultFound}
+        </TextTitleError>
+        <TextMessageError>
+          {status === ServiceStatus.exception
+            ? messageException
+            : status === ServiceStatus.noInternet
+            ? messageNoInternet
+            : messageNoResultFound}
+        </TextMessageError>
+      </ViewError>
+    );
   };
 
   getFooterComponent = () => {
@@ -176,9 +204,11 @@ export class ShowCardsList extends React.Component<Props, State> {
         <List
           ref={ref => (this.flatListRef = ref)}
           data={cards}
+          removeClippedSubviews={true}
           keyExtractor={item => item.id.toString()}
           scrollEnabled={status !== ServiceStatus.loading}
           ItemSeparatorComponent={this.getSeparatorComponent}
+          ListEmptyComponent={this.getEmptyComponent}
           ListFooterComponent={this.getFooterComponent}
           onEndReached={this.onEndReached}
           onEndReachedThreshold={0.5}
