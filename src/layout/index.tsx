@@ -18,12 +18,11 @@ export class Layout extends React.PureComponent {
           <NavigationContainer>
             <Stack.Navigator
               screenOptions={{
-                headerTitleAlign: "center",
+                headerTitleAlign: "left",
                 headerStyle: {
                   backgroundColor: Colors.headerColor,
                   elevation: 0,
                   shadowOpacity: 0,
-                  borderBottomWidth: 0.5,
                 },
                 headerTitleStyle: {
                   fontWeight: "600",

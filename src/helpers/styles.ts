@@ -1,11 +1,22 @@
 import {Dimensions, StyleProp, TextStyle} from "react-native";
 
 export class HelperStyles {
-  static getPercentSizePage = (type: "width" | "height", number: number): string => {
+  static getPercentSizePage = (
+    type: "width" | "height",
+    number: number,
+    typeExtraValue: "min" | "max" | undefined = undefined,
+    extraValue = 0
+  ): string => {
     const {width, height} = Dimensions.get("window");
-    const value = type === "width" ? width : height;
+    let value = (type === "width" ? width : height) * (number / 100);
 
-    return `${value * (number / 100)}px`;
+    if (typeExtraValue === "min") {
+      value = value > extraValue ? value : extraValue;
+    } else if (typeExtraValue === "max") {
+      value = value < extraValue ? value : extraValue;
+    }
+
+    return `${value}px`;
   };
 
   static getPropertyOfStyle<T>(styles: StyleProp<TextStyle>, property: string, defaultValue: T): T {
