@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   Vibration,
+  View,
 } from "react-native";
 import {InputAnimatedStyles, ViewAnimatedStyles} from "../../../../helpers/animated-types";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -74,6 +75,27 @@ export class ShowCardsInputSearch extends React.Component<Props, State> {
     this.setState({placeholderFalseLayout: event.nativeEvent.layout});
   };
 
+  getEraseLayout = () => {
+    const {EraseButton} = ShowCardsInputSearchStyles;
+
+    const {hasInputFocus, inputText} = this.state;
+
+    const eraseInput = () => {
+      Vibration.vibrate(500);
+      this.setState({inputText: ""});
+    };
+
+    const hasEraseButton = hasInputFocus && inputText !== "";
+
+    return (
+      hasEraseButton && (
+        <EraseButton onPress={eraseInput}>
+          <Icon size={20} color={Colors.grayDark} name="times-circle" />
+        </EraseButton>
+      )
+    );
+  };
+
   getInputLayout = () => {
     const {Input, FalsePlaceholder, FalsePlaceholderText} = ShowCardsInputSearchStyles;
 
@@ -97,7 +119,7 @@ export class ShowCardsInputSearch extends React.Component<Props, State> {
     };
 
     return (
-      <>
+      <View style={{flex: 1}}>
         <Input
           onLayout={this.setSizeInput}
           ref={(ref: TextInput) => (this.inputRef = ref)}
@@ -117,28 +139,8 @@ export class ShowCardsInputSearch extends React.Component<Props, State> {
             {inputText ? inputText : placeholder}
           </FalsePlaceholderText>
         </FalsePlaceholder>
-      </>
-    );
-  };
-
-  getEraseLayout = () => {
-    const {EraseButton} = ShowCardsInputSearchStyles;
-
-    const {hasInputFocus, inputText} = this.state;
-
-    const eraseInput = () => {
-      Vibration.vibrate(500);
-      this.setState({inputText: ""});
-    };
-
-    const hasEraseButton = hasInputFocus && inputText !== "";
-
-    return (
-      hasEraseButton && (
-        <EraseButton onPress={eraseInput}>
-          <Icon size={20} color={Colors.grayDark} name="times-circle" />
-        </EraseButton>
-      )
+        {this.getEraseLayout()}
+      </View>
     );
   };
 
@@ -181,7 +183,6 @@ export class ShowCardsInputSearch extends React.Component<Props, State> {
     return (
       <View>
         {this.getInputLayout()}
-        {this.getEraseLayout()}
         {this.getCancelButton()}
       </View>
     );

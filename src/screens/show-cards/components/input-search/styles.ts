@@ -12,9 +12,12 @@ export const ShowCardsInputSearchStyles = {
     background-color: ${Colors.headerColor};
     flex-direction: row;
   `,
-  Input: styled(AnimatedTextInput)`
+  ViewInput: styled.View`
     flex: 1;
-    width: 100%;
+    height: 50px;
+  `,
+  Input: styled(AnimatedTextInput)`
+    width: 95%;
     border: 1px solid ${Colors.grayLight};
     border-radius: 10px;
     padding: 5px;
@@ -32,12 +35,13 @@ export const ShowCardsInputSearchStyles = {
   `,
   EraseButton: styled(AnimatedIcon)`
     position: absolute;
-    right: 90px;
-    top: 18px;
+    right: 15px;
+    top: 15px;
     font-size: 18px;
     color: ${Colors.grayDark};
     width: 20px;
     height: 20px;
+    z-index: 100;
   `,
   CancelButton: styled(Animated.View)`
     flex: 1;
