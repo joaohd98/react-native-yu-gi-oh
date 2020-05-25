@@ -18,12 +18,29 @@ export class Layout extends React.PureComponent {
           <NavigationContainer>
             <Stack.Navigator
               screenOptions={{
+                headerTitleAlign: "center",
                 headerStyle: {
                   backgroundColor: Colors.headerColor,
+                  elevation: 0,
+                  shadowOpacity: 0,
+                  borderBottomWidth: 0.5,
+                },
+                headerTitleStyle: {
+                  fontWeight: "600",
+                  color: Colors.black,
+                  fontSize: 20,
+                  lineHeight: 50,
+                  textTransform: "none",
                 },
               }}
             >
-              <Stack.Screen name="ShowCardsScreen" component={ShowCardsScreen} />
+              <Stack.Screen
+                options={{
+                  headerTitle: "Yu-Gi-Oh!",
+                }}
+                name="ShowCardsScreen"
+                component={ShowCardsScreen}
+              />
             </Stack.Navigator>
           </NavigationContainer>
         </PersistGate>
