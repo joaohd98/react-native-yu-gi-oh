@@ -7,6 +7,7 @@ import {ServiceStatus} from "../../../../services/model";
 import {AllCardsResponse} from "../../../../services/get-all-cards/response";
 import {images} from "../../../../theme/images";
 import {ShowCardsFullImage} from "../full-image";
+import {FlatList} from "react-native";
 
 interface Props {
   cards: AllCardsResponse[];
@@ -15,6 +16,7 @@ interface Props {
   screenHeight: number;
   addCardsLimit: () => void;
   hasMoreToLoad: boolean;
+  searchText: string
 }
 
 interface State {
@@ -39,11 +41,16 @@ export class ShowCardsList extends React.Component<Props, State> {
     ],
   };
 
+  flatListRef: FlatList | null = null;
   listRefImage: Image[] = [];
 
   componentDidUpdate(prevProps: Readonly<Props>) {
     if (this.state.hasReachBottom && prevProps.cards.length !== this.props.cards.length) {
       this.setState({hasReachBottom: false});
+    }
+
+    if (this.flatListRef && this.props.searchText !== prevProps.searchText) {
+      this.flatListRef.scrollToOffset({animated: false, offset: 0});
     }
   }
 
@@ -167,6 +174,7 @@ export class ShowCardsList extends React.Component<Props, State> {
     return (
       <>
         <List
+          ref={ref => (this.flatListRef = ref)}
           data={cards}
           keyExtractor={item => item.id.toString()}
           scrollEnabled={status !== ServiceStatus.loading}

@@ -38,6 +38,7 @@ export class ShowCards extends React.Component<ShowCardsScreenProps, ShowCardsSc
           cards={cardsFiltered.slice(0, limit)}
           hasMoreToLoad={limit + offset < cardsFiltered.length}
           screenHeight={screenHeight}
+          searchText={searchText}
           addCardsLimit={() => addLimitCard(limit, offset)}
         />
       </Container>
