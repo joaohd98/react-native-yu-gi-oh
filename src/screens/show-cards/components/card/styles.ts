@@ -15,7 +15,6 @@ export const ShowCardsListCardStyles = {
     background-color: ${Colors.grayLight};
   `,
   View: styled(Animated.View)<ViewAnimatedStyles>`
-    flex: 1;
     background-color: ${Colors.backgroundColor};
     flex-direction: row;
     padding: 7px;

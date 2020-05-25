@@ -1,4 +1,4 @@
-import {Animated, Dimensions, Image, View} from "react-native";
+import {Animated, Dimensions, Image} from "react-native";
 import React from "react";
 import {ViewAnimatedStyles} from "../../../../helpers/animated-types";
 import {ShowCardsListCard} from "../card";
@@ -19,13 +19,13 @@ interface State {
   activeIndex?: number;
   cardsAnimations: Animated.Value[];
   loadingIcons: {name: string; animated: Animated.Value}[];
-  isLoading: boolean;
+  hasReachBottom: boolean;
 }
 
 export class ShowCardsList extends React.Component<Props, State> {
   state: State = {
     cardsAnimations: [],
-    isLoading: false,
+    hasReachBottom: false,
     loadingIcons: [
       {name: images.millenniumEye, animated: new Animated.Value(0)},
       {name: images.millenniumKey, animated: new Animated.Value(0)},
@@ -38,6 +38,12 @@ export class ShowCardsList extends React.Component<Props, State> {
   };
 
   listRefImage: Image[] = [];
+
+  componentDidUpdate(prevProps: Readonly<Props>) {
+    if (this.state.hasReachBottom && prevProps.cards.length !== this.props.cards.length) {
+      this.setState({hasReachBottom: false});
+    }
+  }
 
   getSeparatorComponent = () => {
     const {Separator} = ShowCardsListStyles;
@@ -53,7 +59,7 @@ export class ShowCardsList extends React.Component<Props, State> {
     const valueAnimated = -30;
     const seconds = 300;
 
-    if (!this.state.isLoading) {
+    if (!this.state.hasReachBottom) {
       return <></>;
     }
 
@@ -105,24 +111,41 @@ export class ShowCardsList extends React.Component<Props, State> {
   };
 
   onEndReached = () => {
-    if (!this.state.isLoading) {
-      this.setState({isLoading: true}, () => {
-        setTimeout(() => this.props.addCardsLimit(), 500);
+    if (!this.state.hasReachBottom) {
+      this.setState({hasReachBottom: true}, () => {
+        setTimeout(() => this.props.addCardsLimit(), 1000);
       });
     }
   };
 
-  getAnimationStyle = (/*index: number*/) => {
+  getAnimationStyle = (index: number) => {
+    const isEven = index % 2 === 0;
+    const width = (Dimensions.get("window").width / 2) * (isEven ? 1 : -1);
+    const {cardsAnimations} = this.state;
+    let animated = cardsAnimations[index];
+
+    if (!cardsAnimations[index]) {
+      animated = new Animated.Value(width);
+      cardsAnimations[index] = animated;
+    }
+
+    Animated.timing(animated, {
+      toValue: 0,
+      duration: 200,
+      delay: 100 * index,
+      useNativeDriver: true,
+    }).start();
+
     const viewStyle: ViewAnimatedStyles = {
-      // opacity: animated.interpolate({
-      //   inputRange: isEven ? [0, width] : [width, 0],
-      //   outputRange: isEven ? [1, 0] : [0, 1],
-      // }),
-      // transform: [
-      //   {
-      //     translateX: animated,
-      //   },
-      // ],
+      opacity: animated.interpolate({
+        inputRange: isEven ? [0, width] : [width, 0],
+        outputRange: isEven ? [1, 0] : [0, 1],
+      }),
+      transform: [
+        {
+          translateX: animated,
+        },
+      ],
     };
 
     return viewStyle;
@@ -147,7 +170,7 @@ export class ShowCardsList extends React.Component<Props, State> {
           renderItem={({item, index}) => (
             <ShowCardsListCard
               setRef={ref => (this.listRefImage[index] = ref)}
-              style={this.getAnimationStyle(/*index*/)}
+              style={this.getAnimationStyle(index)}
               onOpenImage={() => this.setState({activeIndex: index})}
               isLoading={status === ServiceStatus.loading}
               cardContent={item}
