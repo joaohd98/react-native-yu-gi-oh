@@ -30,6 +30,7 @@ export class ShowCards extends React.Component<ShowCardsScreenProps, ShowCardsSc
         <ShowCardsInputSearch />
         <ShowCardsList
           status={status}
+          limitIndexAnimation={offset}
           cards={cards.slice(0, limit)}
           screenHeight={screenHeight}
           addCardsLimit={() => addLimitCard(limit, offset)}

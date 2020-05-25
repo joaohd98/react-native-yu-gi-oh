@@ -10,6 +10,7 @@ import {ShowCardsFullImage} from "../full-image";
 
 interface Props {
   cards: AllCardsResponse[];
+  limitIndexAnimation: number;
   status: ServiceStatus;
   screenHeight: number;
   addCardsLimit: () => void;
@@ -57,13 +58,15 @@ export class ShowCardsList extends React.Component<Props, State> {
     const animations: Animated.CompositeAnimation[] = [];
     const elements: Element[] = [];
     const valueAnimated = -30;
-    const seconds = 300;
+    const seconds = 200;
 
     if (!this.state.hasReachBottom) {
       return <></>;
     }
 
-    icons.map(icon => {
+    icons.forEach(icon => {
+      icon.animated.setValue(0);
+
       animations.push(
         Animated.timing(icon.animated, {
           toValue: valueAnimated,
@@ -113,15 +116,16 @@ export class ShowCardsList extends React.Component<Props, State> {
   onEndReached = () => {
     if (!this.state.hasReachBottom) {
       this.setState({hasReachBottom: true}, () => {
-        setTimeout(() => this.props.addCardsLimit(), 1000);
+        setTimeout(() => this.props.addCardsLimit(), Math.random() * 3000);
       });
     }
   };
 
   getAnimationStyle = (index: number) => {
     const isEven = index % 2 === 0;
-    const width = (Dimensions.get("window").width / 2) * (isEven ? 1 : -1);
+    const width = (Dimensions.get("window").width / 1.5) * (isEven ? 1 : -1);
     const {cardsAnimations} = this.state;
+    const {limitIndexAnimation} = this.props;
     let animated = cardsAnimations[index];
 
     if (!cardsAnimations[index]) {
@@ -130,11 +134,11 @@ export class ShowCardsList extends React.Component<Props, State> {
     }
 
     Animated.sequence([
-      Animated.delay(50 * index),
+      Animated.delay(150 * (index >= limitIndexAnimation ? 1 : index)),
       Animated.timing(animated, {
         toValue: 0,
         duration: 200,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
     ]).start();
 
@@ -168,7 +172,7 @@ export class ShowCardsList extends React.Component<Props, State> {
           ItemSeparatorComponent={this.getSeparatorComponent}
           ListFooterComponent={this.getFooterComponent}
           onEndReached={this.onEndReached}
-          onEndReachedThreshold={0.01}
+          onEndReachedThreshold={0.5}
           renderItem={({item, index}) => (
             <ShowCardsListCard
               setRef={ref => (this.listRefImage[index] = ref)}
