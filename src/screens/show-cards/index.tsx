@@ -22,16 +22,21 @@ export class ShowCards extends React.Component<ShowCardsScreenProps, ShowCardsSc
   }
 
   render() {
-    const {status, cards, limit, addLimitCard, offset} = this.props;
+    const {status, cards, limit, addLimitCard, filterCards, searchText, offset} = this.props;
     const {screenHeight} = this.state;
+    const cardsFiltered =
+      searchText === ""
+        ? cards
+        : cards.filter(({name}) => name.toLowerCase().includes(searchText.toLowerCase()));
 
     return (
       <Container onLayout={event => this.setState({screenHeight: event.nativeEvent.layout.height})}>
-        <ShowCardsInputSearch />
+        <ShowCardsInputSearch text={searchText} onChangeText={filterCards} />
         <ShowCardsList
           status={status}
           limitIndexAnimation={offset}
-          cards={cards.slice(0, limit)}
+          cards={cardsFiltered.slice(0, limit)}
+          hasMoreToLoad={limit + offset < cardsFiltered.length}
           screenHeight={screenHeight}
           addCardsLimit={() => addLimitCard(limit, offset)}
         />
@@ -47,6 +52,7 @@ const mapStateToProps = (state: StatesReducers): ShowCardsScreenProps => ({
 const mapDispatchToProps = (dispatch: Dispatch): ShowCardsScreenPropsActions => ({
   getAllCard: bindActionCreators(ShowCardScreenInitial.getAllCard, dispatch),
   addLimitCard: bindActionCreators(ShowCardScreenInitial.addLimitCard, dispatch),
+  filterCards: bindActionCreators(ShowCardScreenInitial.filterCards, dispatch),
 });
 
 export const ShowCardsScreen = connect(mapStateToProps, mapDispatchToProps)(ShowCards);

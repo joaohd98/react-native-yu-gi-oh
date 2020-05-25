@@ -7,12 +7,14 @@ import {REHYDRATE} from "redux-persist/es/constants";
 import {AllCardsResponse} from "../../../services/get-all-cards/response";
 
 export const ShowCardScreenInitial: ShowCardsScreenProps = {
+  searchText: "",
   cards: [],
   status: ServiceStatus.loading,
   limit: 10,
   offset: 10,
   getAllCard: () => ShowCardsScreenAction.getAllCard(),
   addLimitCard: (limit, offset) => ShowCardsScreenAction.addLimitCard(limit, offset),
+  filterCards: searchText => ShowCardsScreenAction.filterCards(searchText),
 };
 
 export const ShowCardScreenReducer: Reducer<ShowCardsScreenProps, ShowCardsScreenActionType> = (
@@ -46,6 +48,14 @@ export const ShowCardScreenReducer: Reducer<ShowCardsScreenProps, ShowCardsScree
       return {
         ...state,
         limit: action.limit + action.offset,
+      };
+    }
+
+    case ShowCardsScreenActionConst.filterCards: {
+      return {
+        ...state,
+        searchText: action.searchText,
+        limit: state.offset,
       };
     }
 

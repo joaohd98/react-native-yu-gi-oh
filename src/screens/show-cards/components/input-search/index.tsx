@@ -9,12 +9,12 @@ import {
   Vibration,
 } from "react-native";
 import {InputAnimatedStyles, ViewAnimatedStyles} from "../../../../helpers/animated-types";
-import {ShowCardsInputSearchConst} from "./const";
 import Icon from "react-native-vector-icons/FontAwesome";
 import {Colors} from "../../../../theme/colors";
 
 interface Props {
-  test?: undefined;
+  text: string;
+  onChangeText: (text: string) => void;
 }
 
 interface State {
@@ -35,6 +35,14 @@ export class ShowCardsInputSearch extends React.Component<Props, State> {
   };
 
   inputRef: TextInput | null = null;
+
+  componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>) {
+    const {inputText} = this.state;
+
+    if (prevState.inputText !== inputText) {
+      this.props.onChangeText(inputText);
+    }
+  }
 
   handleInputFocus = (isFocused: boolean) => {
     const toValue = isFocused ? 0 : 1;
@@ -71,13 +79,11 @@ export class ShowCardsInputSearch extends React.Component<Props, State> {
 
     const {blurFocusAnimation, inputText, inputLayout, placeholderFalseLayout} = this.state;
 
-    const {placeholder} = ShowCardsInputSearchConst;
-
     const widthInput = inputLayout ? inputLayout.width : 0;
     const widthPlaceholder = placeholderFalseLayout ? placeholderFalseLayout.width : 0;
 
     const placeholderLeftValue = (widthInput - widthPlaceholder) / 2;
-
+    const placeholder = "Search for your card...";
     const inputStyle: InputAnimatedStyles = {
       paddingRight: blurFocusAnimation.interpolate({
         inputRange: [0, 1],
@@ -140,8 +146,6 @@ export class ShowCardsInputSearch extends React.Component<Props, State> {
 
     const {blurFocusAnimation} = this.state;
 
-    const {cancelText} = ShowCardsInputSearchConst;
-
     const cancelButtonStyle: ViewAnimatedStyles = {
       marginRight: blurFocusAnimation.interpolate({
         inputRange: [0, 1],
@@ -164,7 +168,7 @@ export class ShowCardsInputSearch extends React.Component<Props, State> {
     return (
       <TouchableOpacity onPress={this.handleCancelButton}>
         <CancelButton style={cancelButtonStyle}>
-          <CancelButtonText numberOfLines={1}>{cancelText}</CancelButtonText>
+          <CancelButtonText numberOfLines={1}>Close</CancelButtonText>
         </CancelButton>
       </TouchableOpacity>
     );

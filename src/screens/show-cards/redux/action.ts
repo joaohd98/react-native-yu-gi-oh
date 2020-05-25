@@ -27,4 +27,9 @@ export class ShowCardsScreenAction {
     limit,
     offset,
   });
+
+  static filterCards = (searchText: string): Response => ({
+    type: ShowCardsScreenActionConst.filterCards,
+    searchText,
+  });
 }

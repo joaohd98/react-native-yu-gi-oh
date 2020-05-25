@@ -14,6 +14,7 @@ interface Props {
   status: ServiceStatus;
   screenHeight: number;
   addCardsLimit: () => void;
+  hasMoreToLoad: boolean;
 }
 
 interface State {
@@ -114,7 +115,7 @@ export class ShowCardsList extends React.Component<Props, State> {
   };
 
   onEndReached = () => {
-    if (!this.state.hasReachBottom) {
+    if (!this.state.hasReachBottom && this.props.hasMoreToLoad) {
       this.setState({hasReachBottom: true}, () => {
         setTimeout(() => this.props.addCardsLimit(), Math.random() * 3000);
       });

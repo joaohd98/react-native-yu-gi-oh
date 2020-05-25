@@ -1,5 +1,5 @@
 import React from "react";
-import {Animated, TextProps, TextStyle} from "react-native";
+import {Animated, TextProps} from "react-native";
 import {Colors} from "../../theme/colors";
 import {TextAnimatedStyles} from "../../helpers/animated-types";
 import {HelperStyles} from "../../helpers/styles";
@@ -64,6 +64,10 @@ export class CustomText extends React.Component<Props, State> {
       style: [style, styleAnimation],
     };
 
-    return <Animated.Text {...props}>{this.props.children}</Animated.Text>;
+    return (
+      <Animated.Text {...props}>
+        {this.props.children}
+      </Animated.Text>
+    );
   }
 }
