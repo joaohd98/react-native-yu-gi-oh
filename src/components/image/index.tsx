@@ -39,7 +39,7 @@ export class CustomImage extends React.Component<Props, State> {
   }
 
   render() {
-    const {TouchableOpacity, Image} = CustomImageStyle;
+    const {TouchableOpacity, Image, ViewCover} = CustomImageStyle;
     const {style, styleView, setRef, isLoading, onPress} = this.props;
     const background = HelperStyles.getPropertyOfStyle<string>(
       style,
@@ -73,12 +73,12 @@ export class CustomImage extends React.Component<Props, State> {
       source: this.props.source,
       style: [style, styleAnimation],
       resizeMode: this.props.resizeMode,
-      ref: ref => (setRef ? setRef(ref) : {}),
       onLoadEnd: () => this.setState({hasLoad: true}),
     };
 
     return (
       <TouchableOpacity {...touchableOpacityProps}>
+        <ViewCover ref={ref => (setRef ? setRef(ref) : {})} />
         <Image {...imageProps} />
       </TouchableOpacity>
     );

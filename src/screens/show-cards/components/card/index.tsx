@@ -1,14 +1,14 @@
 import React from "react";
 import {ViewAnimatedStyles} from "../../../../helpers/animated-types";
 import {ShowCardsListCardStyles} from "./styles";
-import {Image} from "react-native";
+import {Image, View} from "react-native";
 import {AllCardsResponse} from "../../../../services/get-all-cards/response";
 import {images} from "../../../../theme/images";
 
 interface Props {
   isLoading: boolean;
   style: ViewAnimatedStyles;
-  setRef: (ref: Image) => void;
+  setRef: (ref: View) => void;
   onOpenImage: () => void;
   cardContent?: AllCardsResponse;
 }
