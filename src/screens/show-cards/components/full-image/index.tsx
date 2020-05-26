@@ -1,6 +1,5 @@
 import React from "react";
 import {Animated, Dimensions, Image, View} from "react-native";
-import {ShowCardsListStyles} from "../list-cards/styles";
 import {AllCardsResponse} from "../../../../services/get-all-cards/response";
 import {ShowCardsFullImageStyles} from "./styles";
 

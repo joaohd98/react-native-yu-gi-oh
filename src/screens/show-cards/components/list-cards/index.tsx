@@ -41,7 +41,7 @@ export class ShowCardsList extends React.Component<Props, State> {
   };
 
   flatListRef: FlatList | null = null;
-  listRefImage: Image[] = [];
+  listRefImage: {[key: string]: Image} = {};
 
   componentDidUpdate(prevProps: Readonly<Props>) {
     if (this.state.hasReachBottom && prevProps.cards.length !== this.props.cards.length) {
@@ -50,6 +50,10 @@ export class ShowCardsList extends React.Component<Props, State> {
 
     if (this.flatListRef && this.props.searchText !== prevProps.searchText) {
       this.flatListRef.scrollToOffset({animated: false, offset: 0});
+    }
+
+    if (prevProps.searchText !== this.props.searchText) {
+      console.log(this.listRefImage);
     }
   }
 
@@ -152,7 +156,7 @@ export class ShowCardsList extends React.Component<Props, State> {
   onEndReached = () => {
     if (!this.state.hasReachBottom && this.props.hasMoreToLoad) {
       this.setState({hasReachBottom: true}, () => {
-        setTimeout(() => this.props.addCardsLimit(), Math.random() * 3000);
+        setTimeout(() => this.props.addCardsLimit(), Math.random() * 5000);
       });
     }
   };
@@ -211,7 +215,7 @@ export class ShowCardsList extends React.Component<Props, State> {
           ListEmptyComponent={this.getEmptyComponent}
           ListFooterComponent={this.getFooterComponent}
           onEndReached={this.onEndReached}
-          onEndReachedThreshold={0.5}
+          onEndReachedThreshold={1}
           renderItem={({item, index}) => (
             <ShowCardsListCard
               setRef={ref => (this.listRefImage[index] = ref)}
