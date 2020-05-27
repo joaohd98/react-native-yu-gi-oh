@@ -4,6 +4,7 @@ import {DetailsCardScreenProps} from "./model/props";
 import {Animated, ScrollView} from "react-native";
 import {DetailsCardScreenState} from "./model/state";
 import {StatesReducers} from "../../redux/reducers";
+import {DetailsCardNameImage} from "./components/name-image";
 
 export class DetailsCard extends React.Component<DetailsCardScreenProps, DetailsCardScreenState> {
   state: DetailsCardScreenState = {
@@ -12,48 +13,28 @@ export class DetailsCard extends React.Component<DetailsCardScreenProps, Details
   };
 
   render() {
-    const {animationScroll} = this.state;
-
-    const styleAnimation = {
-      backgroundColor: animationScroll.interpolate({
-        inputRange: [0, 299.99, 300, 599.99, 600, 899.99, 900],
-        outputRange: ["pink", "pink", "red", "red", "gray", "gray", "orange"],
-        extrapolate: "clamp",
-      }),
-    };
+    const {animationScroll, selectedCard} = this.state;
+    const animatedEvent = Animated.event(
+      [
+        {
+          nativeEvent: {
+            contentOffset: {
+              y: animationScroll,
+            },
+          },
+        },
+      ],
+      {useNativeDriver: false}
+    );
 
     return (
       <>
-        <ScrollView
-          scrollEventThrottle={25}
-          onScroll={Animated.event(
-            [
-              {
-                nativeEvent: {
-                  contentOffset: {
-                    y: animationScroll,
-                  },
-                },
-              },
-            ],
-            {useNativeDriver: false}
-          )}
-        >
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18].map(index => (
-            <Animated.View
-              key={index.toString()}
-              style={[
-                {
-                  backgroundColor: "red",
-                  borderColor: "green",
-                  borderWidth: 1,
-                  height: 300,
-                  width: "100%",
-                },
-                styleAnimation,
-              ]}
-            />
-          ))}
+        <ScrollView scrollEventThrottle={25} onScroll={animatedEvent}>
+          <DetailsCardNameImage
+            name={selectedCard.name}
+            image={selectedCard.getImage("big")}
+            animationScroll={animationScroll}
+          />
         </ScrollView>
       </>
     );
