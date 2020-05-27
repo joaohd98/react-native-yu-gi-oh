@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import {Colors} from "../../../../theme/colors";
-import {Animated, FlatList, FlatListProps, ImageProps, ViewProps} from "react-native";
+import {Animated, FlatList, FlatListProps, ImageProps, Platform, ViewProps} from "react-native";
 import {AllCardsResponse} from "../../../../services/get-all-cards/response";
 
 export const ShowCardsListStyles = {
@@ -31,6 +31,7 @@ export const ShowCardsListStyles = {
     flex-direction: row;
     margin-top: 50px;
     justify-content: center;
+    margin-bottom: ${Platform.select({ios: 0, android: 50})}px;
   `,
   ImageFooter: styled(Animated.Image)<ImageProps>`
     width: 32px;

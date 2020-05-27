@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import {ImageProps, TextProps, ViewProps} from "react-native";
+import {ImageProps, Platform, TextProps, ViewProps} from "react-native";
 import {CustomImage} from "../../../../components/image";
 import {CustomText} from "../../../../components/text";
 
@@ -18,7 +18,7 @@ export const DetailsCardTypeStyles = {
   TextType: styled(CustomText)<TextProps>`
     flex: 1;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: ${Platform.select({ios: 500, android: 700})};
     margin-left: 5px;
   `,
   ImageEquip: styled(CustomImage).attrs(() => ({
