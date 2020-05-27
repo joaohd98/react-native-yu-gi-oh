@@ -78,7 +78,7 @@ export class CustomImage extends React.Component<Props, State> {
 
     return (
       <TouchableOpacity {...touchableOpacityProps}>
-        <ViewCover ref={ref => (setRef ? setRef(ref) : {})} />
+        <ViewCover ref={ref => (setRef ? setRef(ref) : {})} onLayout={() => true} />
         <Image {...imageProps} />
       </TouchableOpacity>
     );

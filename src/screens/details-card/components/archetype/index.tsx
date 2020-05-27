@@ -11,12 +11,14 @@ export class DetailsCardArchetype extends React.Component<Props> {
   state: State = {};
 
   render() {
-    const {View, Icon, Text, TextCaption} = DetailsCardArchetypeStyles;
+    const {View, ViewImage, Icon, Text, TextCaption} = DetailsCardArchetypeStyles;
     const {archetype} = this.props;
 
     return (
       <View>
-        <Icon name={"building"} />
+        <ViewImage>
+          <Icon name={"building"} />
+        </ViewImage>
         <TextCaption>Archetype:</TextCaption>
         <Text>{archetype}</Text>
       </View>

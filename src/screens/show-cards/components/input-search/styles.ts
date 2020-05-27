@@ -1,9 +1,7 @@
 import styled from "styled-components/native";
 import {Colors} from "../../../../theme/colors";
-import Icon from "react-native-vector-icons/FontAwesome";
 import {Animated, TextInput, TouchableOpacity} from "react-native";
 
-const AnimatedIcon = Animated.createAnimatedComponent(TouchableOpacity);
 const AnimatedTouchableOpacity = Animated.createAnimatedComponent(TouchableOpacity);
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
@@ -33,15 +31,16 @@ export const ShowCardsInputSearchStyles = {
   FalsePlaceholderText: styled(Animated.Text)`
     font-size: 18px;
   `,
-  EraseButton: styled(AnimatedIcon)`
+  EraseButton: styled(AnimatedTouchableOpacity)`
     position: absolute;
-    right: 15px;
-    top: 15px;
-    font-size: 18px;
     color: ${Colors.grayDark};
     width: 20px;
-    height: 20px;
+    height: 100%;
     z-index: 100;
+    justify-content: center;
+    align-items: center;
+    right: 20px;
+    bottom: 0;
   `,
   CancelButton: styled(Animated.View)`
     flex: 1;

@@ -7,6 +7,10 @@ export const DetailsCardArchetypeStyles = {
     display: flex;
     flex-direction: row;
   `,
+  ViewImage: styled.View<ViewProps>`
+    justify-content: center;
+    align-items: center;
+  `,
   Icon: styled(Icon)<TextProps>`
     font-size: 18px;
     margin-right: 5px;
