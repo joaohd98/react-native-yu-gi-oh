@@ -1,11 +1,12 @@
 import React from "react";
 import {connect} from "react-redux";
 import {DetailsCardScreenProps} from "./model/props";
-import {Animated, ScrollView} from "react-native";
+import {Animated, ScrollView, View} from "react-native";
 import {DetailsCardScreenState} from "./model/state";
 import {StatesReducers} from "../../redux/reducers";
 import {DetailsCardImage} from "./components/image";
 import {DetailsCardName} from "./components/name";
+import {DetailsCardType} from "./components/type";
 
 export class DetailsCard extends React.Component<DetailsCardScreenProps, DetailsCardScreenState> {
   state: DetailsCardScreenState = {
@@ -36,6 +37,16 @@ export class DetailsCard extends React.Component<DetailsCardScreenProps, Details
             image={selectedCard.getImage("big")}
             animationScroll={animationScroll}
           />
+          <View style={{margin: 10}}>
+            <DetailsCardType
+              race={selectedCard.race}
+              raceImage={selectedCard.getRaceImage()}
+              attribute={selectedCard.attribute}
+              attributeImage={selectedCard.getAttributeImage()}
+              type={selectedCard.type}
+              typeImage={selectedCard.getTypeImage()}
+            />
+          </View>
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18].map(index => (
             <Animated.View
               key={index.toString()}

@@ -24,8 +24,8 @@ export class DetailsCardImage extends React.Component<Props> {
 
     const stylesAnimation: ViewAnimatedStyles = {
       opacity: animationScroll.interpolate({
-        inputRange: [0, cardHeight],
-        outputRange: [1, 0.2],
+        inputRange: [100, cardHeight],
+        outputRange: [1, 0.5],
         extrapolate: "clamp",
       }),
     };
