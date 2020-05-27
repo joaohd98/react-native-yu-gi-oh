@@ -21,10 +21,6 @@ export class DetailsCard extends React.Component<DetailsCardScreenProps, Details
     selectedCard: this.props.cards?.find(({id}) => id === this.props.route?.params.cardId!)!,
   };
 
-  componentDidMount() {
-    console.warn(this.state.selectedCard);
-  }
-
   render() {
     const {animationScroll, selectedCard} = this.state;
     const {View, Item} = DetailsCardStyles;
