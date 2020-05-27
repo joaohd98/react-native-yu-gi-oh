@@ -12,6 +12,8 @@ import {Container} from "../../components/container";
 import {DetailsCardId} from "./components/id";
 import {DetailsCardArchetype} from "./components/archetype";
 import {DetailsCardStyles} from "./styles";
+import {DetailsCardAtkDef} from "./components/atk-def";
+import {DetailsCardLevel} from "./components/level";
 
 export class DetailsCard extends React.Component<DetailsCardScreenProps, DetailsCardScreenState> {
   state: DetailsCardScreenState = {
@@ -60,9 +62,21 @@ export class DetailsCard extends React.Component<DetailsCardScreenProps, Details
             <Item>
               <DetailsCardDescription description={selectedCard.desc} />
             </Item>
-            <Item>
-              <DetailsCardArchetype archetype={selectedCard.archetype} />
-            </Item>
+            {selectedCard.archetype && (
+              <Item>
+                <DetailsCardArchetype archetype={selectedCard.archetype} />
+              </Item>
+            )}
+            {selectedCard.atk && selectedCard.def && (
+              <Item>
+                <DetailsCardAtkDef atk={selectedCard.atk} def={selectedCard.def} />
+              </Item>
+            )}
+            {selectedCard.level !== undefined && (
+              <Item>
+                <DetailsCardLevel level={selectedCard.level} />
+              </Item>
+            )}
           </View>
         </ScrollView>
       </Container>

@@ -8,7 +8,7 @@ export const DetailsCardStyles = {
   `,
   Item: styled.View<ViewProps>`
     border: 1px solid ${Colors.grayDark};
-    padding: 10px;
-    margin-vertical: 10px;
+    padding: 15px 10px;
+    margin-vertical: 15px;
   `,
-}
+};
