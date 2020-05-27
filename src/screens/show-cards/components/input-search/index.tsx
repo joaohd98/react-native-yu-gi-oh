@@ -50,7 +50,7 @@ export class ShowCardsInputSearch extends React.Component<Props, State> {
 
     const animation = Animated.timing(this.state.blurFocusAnimation, {
       toValue,
-      duration: 300,
+      duration: 50,
       useNativeDriver: false,
     });
 
@@ -81,7 +81,7 @@ export class ShowCardsInputSearch extends React.Component<Props, State> {
     const {hasInputFocus, inputText} = this.state;
 
     const eraseInput = () => {
-      Vibration.vibrate(500);
+      Vibration.vibrate(10);
       this.setState({inputText: ""});
     };
 
