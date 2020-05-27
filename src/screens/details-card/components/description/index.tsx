@@ -3,17 +3,28 @@ import {DetailsCardDescriptionStyles} from "./styles";
 
 interface Props {
   description: string;
+  type: string;
+  race: string;
 }
 
-interface State {}
-
 export class DetailsCardDescription extends React.Component<Props> {
-  state: State = {};
+  getTypeText = () => {
+    const {type} = this.props;
+
+    return `/ ${type.split(" ")[0]}`;
+  };
 
   render() {
-    const {Text} = DetailsCardDescriptionStyles;
-    const {description} = this.props;
+    const {View, TextDescription, TextType} = DetailsCardDescriptionStyles;
+    const {description, race} = this.props;
 
-    return <Text>{description}</Text>;
+    return (
+      <View>
+        <TextType>
+          [{race} {this.getTypeText()}]
+        </TextType>
+        <TextDescription>{description}</TextDescription>
+      </View>
+    );
   }
 }

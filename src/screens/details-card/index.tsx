@@ -21,6 +21,10 @@ export class DetailsCard extends React.Component<DetailsCardScreenProps, Details
     selectedCard: this.props.cards?.find(({id}) => id === this.props.route?.params.cardId!)!,
   };
 
+  componentDidMount() {
+    console.warn(this.state.selectedCard);
+  }
+
   render() {
     const {animationScroll, selectedCard} = this.state;
     const {View, Item} = DetailsCardStyles;
@@ -65,14 +69,18 @@ export class DetailsCard extends React.Component<DetailsCardScreenProps, Details
               />
             </Item>
             <Item>
-              <DetailsCardDescription description={selectedCard.desc} />
+              <DetailsCardDescription
+                type={selectedCard.type}
+                race={selectedCard.race}
+                description={selectedCard.desc}
+              />
             </Item>
-            {selectedCard.archetype && (
+            {selectedCard.archetype !== undefined && (
               <Item>
                 <DetailsCardArchetype archetype={selectedCard.archetype} />
               </Item>
             )}
-            {selectedCard.atk && selectedCard.def && (
+            {selectedCard.atk !== undefined && selectedCard.def !== undefined && (
               <Item>
                 <DetailsCardAtkDef atk={selectedCard.atk} def={selectedCard.def} />
               </Item>
