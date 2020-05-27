@@ -3,7 +3,7 @@ import {ImageProps} from "react-native";
 import {HelperStyles} from "../../../../helpers/styles";
 import {CustomImage} from "../../../../components/image";
 
-export const DetailsCardNameImageStyles = {
+export const DetailsCardImageStyles = {
   ImageCard: styled(CustomImage).attrs(() => ({
     styleView: {
       justifyContent: "center",
@@ -11,15 +11,6 @@ export const DetailsCardNameImageStyles = {
     },
   }))<ImageProps>`
     width: ${HelperStyles.getPercentSizePage("width", 100)};
-    height: ${HelperStyles.getPercentSizePage("height", 80)};
-  `,
-  ImageName: styled(CustomImage).attrs(() => ({
-    styleView: {
-      justifyContent: "center",
-      alignItems: "center",
-    },
-  }))<ImageProps>`
-    width: ${HelperStyles.getPercentSizePage("width", 100)};
-    height: 100px;
+    height: ${props => props.cardHeight}px;
   `,
 };

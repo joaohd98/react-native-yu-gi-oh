@@ -238,6 +238,9 @@ PODS:
   - React-jsinspector (0.63.0-rc.1)
   - react-native-config (1.1.0):
     - React
+  - react-native-image-editor (2.3.0):
+    - React
+    - React-RCTImage
   - react-native-netinfo (5.9.0):
     - React
   - react-native-safe-area-context (1.0.0):
@@ -356,6 +359,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `/Users/joaodamazio/Desktop/react-native-yu-gi-oh/node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `/Users/joaodamazio/Desktop/react-native-yu-gi-oh/node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-config (from `../node_modules/react-native-config`)
+  - "react-native-image-editor (from `../node_modules/@react-native-community/image-editor`)"
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-RCTActionSheet (from `/Users/joaodamazio/Desktop/react-native-yu-gi-oh/node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -424,6 +428,8 @@ EXTERNAL SOURCES:
     :path: "/Users/joaodamazio/Desktop/react-native-yu-gi-oh/node_modules/react-native/ReactCommon/jsinspector"
   react-native-config:
     :path: "../node_modules/react-native-config"
+  react-native-image-editor:
+    :path: "../node_modules/@react-native-community/image-editor"
   react-native-netinfo:
     :path: "../node_modules/@react-native-community/netinfo"
   react-native-safe-area-context:
@@ -491,6 +497,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: c40a9c0e687bd7a44cc0a616ff4592a823732a0d
   React-jsinspector: 655f32d922ffb180714c0bec652e7e0923b5a5dd
   react-native-config: 313a1306066289211579b9655eb81d9a565462d0
+  react-native-image-editor: bd67912f38a8e7a895bf6eb8f445acdcefd8fd0c
   react-native-netinfo: 2beabb5930a15eef58093c66910cd5b733acc8dd
   react-native-safe-area-context: 5f3e081f937ab7c44c179d551f332fa494cfcf8f
   React-RCTActionSheet: ead415a8470cd3552f8cadce3b9b32e0d52e46a7

@@ -71,7 +71,7 @@ export class CustomImage extends React.Component<Props, State> {
 
     const imageProps = {
       source: this.props.source,
-      style: [style, styleAnimation],
+      style: [styleAnimation, style],
       resizeMode: this.props.resizeMode,
       onLoadEnd: () => this.setState({hasLoad: true}),
     };

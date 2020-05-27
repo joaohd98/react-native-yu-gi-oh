@@ -4,7 +4,8 @@ import {DetailsCardScreenProps} from "./model/props";
 import {Animated, ScrollView} from "react-native";
 import {DetailsCardScreenState} from "./model/state";
 import {StatesReducers} from "../../redux/reducers";
-import {DetailsCardNameImage} from "./components/name-image";
+import {DetailsCardImage} from "./components/image";
+import {DetailsCardName} from "./components/name";
 
 export class DetailsCard extends React.Component<DetailsCardScreenProps, DetailsCardScreenState> {
   state: DetailsCardScreenState = {
@@ -29,12 +30,26 @@ export class DetailsCard extends React.Component<DetailsCardScreenProps, Details
 
     return (
       <>
+        <DetailsCardName image={selectedCard.getImage("big")} animationScroll={animationScroll} />
         <ScrollView scrollEventThrottle={25} onScroll={animatedEvent}>
-          <DetailsCardNameImage
-            name={selectedCard.name}
+          <DetailsCardImage
             image={selectedCard.getImage("big")}
             animationScroll={animationScroll}
           />
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18].map(index => (
+            <Animated.View
+              key={index.toString()}
+              style={[
+                {
+                  backgroundColor: "red",
+                  borderColor: "green",
+                  borderWidth: 1,
+                  height: 300,
+                  width: "100%",
+                },
+              ]}
+            />
+          ))}
         </ScrollView>
       </>
     );
