@@ -1,4 +1,4 @@
-import {Animated, Dimensions, FlatList, Image} from "react-native";
+import {Animated, Dimensions, FlatList, Image, View} from "react-native";
 import React from "react";
 import {ViewAnimatedStyles} from "../../../../helpers/animated-types";
 import {ShowCardsListCard} from "../card";
@@ -16,6 +16,7 @@ interface Props {
   addCardsLimit: () => void;
   hasMoreToLoad: boolean;
   searchText: string;
+  goDetails: (cardId: number) => void;
 }
 
 interface State {
@@ -41,7 +42,7 @@ export class ShowCardsList extends React.Component<Props, State> {
   };
 
   flatListRef: FlatList | null = null;
-  listRefImage: {[key: string]: Image} = {};
+  listRefImage: {[key: string]: View} = {};
 
   componentDidUpdate(prevProps: Readonly<Props>) {
     if (this.state.hasReachBottom && prevProps.cards.length !== this.props.cards.length) {
@@ -50,10 +51,6 @@ export class ShowCardsList extends React.Component<Props, State> {
 
     if (this.flatListRef && this.props.searchText !== prevProps.searchText) {
       this.flatListRef.scrollToOffset({animated: false, offset: 0});
-    }
-
-    if (prevProps.searchText !== this.props.searchText) {
-      console.log(this.listRefImage);
     }
   }
 
@@ -199,7 +196,7 @@ export class ShowCardsList extends React.Component<Props, State> {
 
   render() {
     const {List} = ShowCardsListStyles;
-    const {status, screenHeight} = this.props;
+    const {status, screenHeight, goDetails} = this.props;
     const {activeIndex} = this.state;
     const cards = AllCardsResponse.isLoadingCards(status, this.props.cards);
 
@@ -223,6 +220,7 @@ export class ShowCardsList extends React.Component<Props, State> {
               onOpenImage={() => this.setState({activeIndex: index})}
               isLoading={status === ServiceStatus.loading}
               cardContent={item}
+              goDetails={cardId => goDetails(cardId)}
             />
           )}
         />

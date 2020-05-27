@@ -5,7 +5,7 @@ import {ShowCardsFullImageStyles} from "./styles";
 
 interface Props {
   card?: AllCardsResponse;
-  refCardImage?: Image;
+  refCardImage?: View;
   screenHeight: number;
   closeImage: () => void;
 }

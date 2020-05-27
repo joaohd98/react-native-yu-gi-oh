@@ -1,7 +1,7 @@
 import React from "react";
 import {ViewAnimatedStyles} from "../../../../helpers/animated-types";
 import {ShowCardsListCardStyles} from "./styles";
-import {Image, View} from "react-native";
+import {View} from "react-native";
 import {AllCardsResponse} from "../../../../services/get-all-cards/response";
 import {images} from "../../../../theme/images";
 
@@ -10,7 +10,8 @@ interface Props {
   style: ViewAnimatedStyles;
   setRef: (ref: View) => void;
   onOpenImage: () => void;
-  cardContent?: AllCardsResponse;
+  goDetails: (cardId: number) => void;
+  cardContent: AllCardsResponse;
 }
 
 export class ShowCardsListCard extends React.Component<Props> {
@@ -72,7 +73,7 @@ export class ShowCardsListCard extends React.Component<Props> {
 
   render() {
     const {Container, View, Image, IconButton, ViewContent, Icon} = ShowCardsListCardStyles;
-    const {style, isLoading, cardContent, setRef, onOpenImage} = this.props;
+    const {style, isLoading, cardContent, setRef, onOpenImage, goDetails} = this.props;
 
     return (
       <Container>
@@ -85,7 +86,7 @@ export class ShowCardsListCard extends React.Component<Props> {
             source={{uri: cardContent?.getImage("big")}}
           />
           <ViewContent>{this.renderTypeRow()}</ViewContent>
-          <IconButton isLoading={isLoading}>
+          <IconButton isLoading={isLoading} onPress={() => goDetails(cardContent.id)}>
             <Icon name={"plus"} />
           </IconButton>
         </View>

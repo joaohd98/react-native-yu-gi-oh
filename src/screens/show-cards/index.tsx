@@ -3,11 +3,8 @@ import {connect} from "react-redux";
 import {ShowCardsInputSearch} from "./components/input-search";
 import {ShowCardsList} from "./components/list-cards";
 import {StatesReducers} from "../../redux/reducers";
-import {
-  ShowCardsScreenProps,
-  ShowCardsScreenPropsActions,
-  ShowCardsScreenState,
-} from "./model/props";
+import {ShowCardsScreenProps, ShowCardsScreenPropsActions} from "./model/props";
+import {ShowCardsScreenState} from "./model/state";
 import {bindActionCreators, Dispatch} from "redux";
 import {ShowCardScreenInitial} from "./redux/reducer";
 import {Container} from "../../components/container";
@@ -39,6 +36,7 @@ export class ShowCards extends React.Component<ShowCardsScreenProps, ShowCardsSc
           hasMoreToLoad={limit + offset < cardsFiltered.length}
           screenHeight={screenHeight}
           searchText={searchText}
+          goDetails={cardId => this.props.navigation?.navigate("DetailsCardScreen", {cardId})}
           addCardsLimit={() => addLimitCard(limit, offset)}
         />
       </Container>

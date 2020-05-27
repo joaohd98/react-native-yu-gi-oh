@@ -1,5 +1,5 @@
 import React from "react";
-import {createStackNavigator} from "@react-navigation/stack";
+import {createStackNavigator, StackNavigationOptions} from "@react-navigation/stack";
 import {NavigationContainer} from "@react-navigation/native";
 import {ShowCardsScreen} from "../screens/show-cards";
 import {RoutesName} from "../routes/routes-name";
@@ -7,38 +7,42 @@ import {Colors} from "../theme/colors";
 import {PersistGate} from "redux-persist/integration/react";
 import {Provider} from "react-redux";
 import {persistor, store} from "../redux/store";
+import {DetailsCardScreen} from "../screens/details-card";
 
 const Stack = createStackNavigator<RoutesName>();
 
 export class Layout extends React.PureComponent {
   render() {
+    const screenOptions: StackNavigationOptions = {
+      headerTitleAlign: "left",
+      headerStyle: {
+        backgroundColor: Colors.headerColor,
+        elevation: 0,
+        shadowOpacity: 0,
+      },
+      headerTitleStyle: {
+        fontWeight: "600",
+        color: Colors.black,
+        fontSize: 20,
+        lineHeight: 50,
+        textTransform: "none",
+      },
+    };
+
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <NavigationContainer>
-            <Stack.Navigator
-              screenOptions={{
-                headerTitleAlign: "left",
-                headerStyle: {
-                  backgroundColor: Colors.headerColor,
-                  elevation: 0,
-                  shadowOpacity: 0,
-                },
-                headerTitleStyle: {
-                  fontWeight: "600",
-                  color: Colors.black,
-                  fontSize: 20,
-                  lineHeight: 50,
-                  textTransform: "none",
-                },
-              }}
-            >
+            <Stack.Navigator screenOptions={screenOptions}>
               <Stack.Screen
-                options={{
-                  headerTitle: "Yu-Gi-Oh!",
-                }}
+                options={{headerTitle: "Yu-Gi-Oh!"}}
                 name="ShowCardsScreen"
                 component={ShowCardsScreen}
+              />
+              <Stack.Screen
+                options={{headerTitle: ""}}
+                name="DetailsCardScreen"
+                component={DetailsCardScreen}
               />
             </Stack.Navigator>
           </NavigationContainer>

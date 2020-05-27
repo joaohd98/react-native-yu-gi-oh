@@ -1,5 +1,6 @@
 import {AllCardsResponse} from "../../../services/get-all-cards/response";
 import {ServiceStatus} from "../../../services/model";
+import {PropsGlobal} from "../../../helpers/props-global";
 
 export interface ShowCardsScreenPropsActions {
   getAllCard: () => void;
@@ -7,14 +8,12 @@ export interface ShowCardsScreenPropsActions {
   filterCards: (searchText: string) => void;
 }
 
-export interface ShowCardsScreenProps extends ShowCardsScreenPropsActions {
+type Type = ShowCardsScreenPropsActions & PropsGlobal<"ShowCardsScreen">;
+
+export interface ShowCardsScreenProps extends Type {
   searchText: string;
   cards: AllCardsResponse[];
   status: ServiceStatus;
   limit: number;
   offset: number;
-}
-
-export interface ShowCardsScreenState {
-  screenHeight: number;
 }

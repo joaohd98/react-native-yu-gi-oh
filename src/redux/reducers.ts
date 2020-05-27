@@ -3,9 +3,12 @@ import {combineReducers} from "redux";
 import {ShowCardScreenReducer} from "../screens/show-cards/redux/reducer";
 import {ShowCardsScreenProps} from "../screens/show-cards/model/props";
 import {persistReducer} from "redux-persist";
+import {DetailsCardScreenProps} from "../screens/details-card/model/props";
+import {DetailsCardScreenReducer} from "../screens/details-card/redux/reducer";
 
 export interface StatesReducers {
   ShowCardScreen: ShowCardsScreenProps;
+  DetailsCardScreen: DetailsCardScreenProps;
 }
 
 const persistConfig = {
@@ -14,8 +17,9 @@ const persistConfig = {
   whitelist: ["cards"],
 };
 
-const ShowCardScreenReducerReducer = persistReducer(persistConfig, ShowCardScreenReducer);
+const ShowCardScreenPersistReducer = persistReducer(persistConfig, ShowCardScreenReducer);
 
 export const Reducers = combineReducers({
-  ShowCardScreen: ShowCardScreenReducerReducer,
+  ShowCardScreen: ShowCardScreenPersistReducer,
+  DetailsCardScreen: DetailsCardScreenReducer,
 });
