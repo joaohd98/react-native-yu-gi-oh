@@ -2,7 +2,6 @@ import styled from "styled-components/native";
 import {ImageProps, TextProps, ViewProps} from "react-native";
 import {CustomImage} from "../../../../components/image";
 import {CustomText} from "../../../../components/text";
-import {Colors} from "../../../../theme/colors";
 
 export const DetailsCardTypeStyles = {
   ViewTypeCard: styled.View<ViewProps>`
@@ -13,12 +12,13 @@ export const DetailsCardTypeStyles = {
     margin-vertical: 10px;
   `,
   ImageType: styled(CustomImage)<ImageProps>`
-    height: 35px;
-    width: 30px;
+    height: 40px;
+    width: 35px;
   `,
   TextType: styled(CustomText)<TextProps>`
     flex: 1;
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 500;
     margin-left: 5px;
   `,
   ImageEquip: styled(CustomImage).attrs(() => ({

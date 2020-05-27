@@ -49,6 +49,11 @@ export class DetailsCard extends React.Component<DetailsCardScreenProps, Details
             <Item>
               <DetailsCardId id={selectedCard.id} />
             </Item>
+            {selectedCard.level !== undefined && (
+              <Item>
+                <DetailsCardLevel level={selectedCard.level} />
+              </Item>
+            )}
             <Item>
               <DetailsCardType
                 race={selectedCard.race}
@@ -70,11 +75,6 @@ export class DetailsCard extends React.Component<DetailsCardScreenProps, Details
             {selectedCard.atk && selectedCard.def && (
               <Item>
                 <DetailsCardAtkDef atk={selectedCard.atk} def={selectedCard.def} />
-              </Item>
-            )}
-            {selectedCard.level !== undefined && (
-              <Item>
-                <DetailsCardLevel level={selectedCard.level} />
               </Item>
             )}
           </View>

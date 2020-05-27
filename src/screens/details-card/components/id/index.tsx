@@ -11,14 +11,14 @@ export class DetailsCardId extends React.Component<Props> {
   state: State = {};
 
   render() {
-    const {Text, TextCaption} = DetailsCardIdStyles;
+    const {View, Text, TextCaption} = DetailsCardIdStyles;
     const {id} = this.props;
 
     return (
-      <Text>
+      <View>
         <TextCaption>ID: </TextCaption>
-        {id}
-      </Text>
+        <Text>{id}</Text>
+      </View>
     );
   }
 }

@@ -8,14 +8,16 @@ interface Props {
 
 export class DetailsCardAtkDef extends React.Component<Props> {
   render() {
-    const {Text, TextCaption} = DetailsCardAtkDefStyles;
+    const {View, Text, TextCaption} = DetailsCardAtkDefStyles;
     const {atk, def} = this.props;
 
     return (
-      <Text>
-        <TextCaption>ATK/ </TextCaption> {atk}
-        <TextCaption> DEF/ </TextCaption> {def}
-      </Text>
+      <View>
+        <TextCaption>ATK/</TextCaption>
+        <Text>{atk}</Text>
+        <TextCaption>DEF/</TextCaption>
+        <Text>{def}</Text>
+      </View>
     );
   }
 }
