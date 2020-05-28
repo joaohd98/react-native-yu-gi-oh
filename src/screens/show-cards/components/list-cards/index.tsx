@@ -97,6 +97,10 @@ export class ShowCardsList extends React.Component<Props, State> {
     const valueAnimated = -30;
     const seconds = 200;
 
+    if (!this.props.hasMoreToLoad) {
+      return <></>;
+    }
+
     icons.forEach((icon, index) => {
       icon.animated.setValue(0);
 

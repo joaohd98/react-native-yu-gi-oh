@@ -21,7 +21,7 @@ export const ShowCardsListCardStyles = {
   `,
   Image: styled(CustomImage)<ImageProps>`
     width: ${HelperStyles.getPercentSizePage("width", 30)};
-    height: ${HelperStyles.getPercentSizePage("height", 40, "max", 250)};
+    height: ${HelperStyles.getPercentSizePage("height", 40, "max", 200)};
   `,
   ViewContent: styled.View<ViewProps>`
     flex: 1;
