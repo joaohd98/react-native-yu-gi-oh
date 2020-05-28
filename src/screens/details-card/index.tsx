@@ -34,7 +34,7 @@ export class DetailsCard extends React.Component<DetailsCardScreenProps, Details
           },
         },
       ],
-      {useNativeDriver: true}
+      {useNativeDriver: false}
     );
 
     return (

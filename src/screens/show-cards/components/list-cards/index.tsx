@@ -45,7 +45,9 @@ export class ShowCardsList extends React.Component<Props, State> {
   listRefImage: {[key: string]: View} = {};
 
   componentDidUpdate(prevProps: Readonly<Props>) {
-    if (this.state.hasReachBottom && prevProps.cards.length !== this.props.cards.length) {
+    const {hasReachBottom} = this.state;
+
+    if (hasReachBottom && prevProps.cards.length !== this.props.cards.length) {
       this.setState({hasReachBottom: false});
     }
 
@@ -96,10 +98,6 @@ export class ShowCardsList extends React.Component<Props, State> {
     const elements: Element[] = [];
     const valueAnimated = -30;
     const seconds = 200;
-
-    if (!this.props.hasMoreToLoad) {
-      return <></>;
-    }
 
     icons.forEach((icon, index) => {
       icon.animated.setValue(0);

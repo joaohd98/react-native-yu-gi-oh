@@ -7,7 +7,6 @@ import {
   TextInput,
   TouchableOpacity,
   Vibration,
-  View,
 } from "react-native";
 import {InputAnimatedStyles, ViewAnimatedStyles} from "../../../../helpers/animated-types";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -22,8 +21,6 @@ interface State {
   blurFocusAnimation: Animated.Value;
   inputText: string;
   hasInputFocus: boolean;
-  inputLayout?: LayoutRectangle;
-  placeholderFalseLayout?: LayoutRectangle;
 }
 
 export class ShowCardsInputSearch extends React.Component<Props, State> {
@@ -31,11 +28,11 @@ export class ShowCardsInputSearch extends React.Component<Props, State> {
     blurFocusAnimation: new Animated.Value(0),
     hasInputFocus: false,
     inputText: this.props.text,
-    inputLayout: undefined,
-    placeholderFalseLayout: undefined,
   };
 
   inputRef: TextInput | null = null;
+  inputLayout?: LayoutRectangle = undefined;
+  placeholderFalseLayout?: LayoutRectangle = undefined;
 
   componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>) {
     const {inputText} = this.state;
@@ -50,7 +47,7 @@ export class ShowCardsInputSearch extends React.Component<Props, State> {
 
     const animation = Animated.timing(this.state.blurFocusAnimation, {
       toValue,
-      duration: 50,
+      duration: 100,
       useNativeDriver: false,
     });
 
@@ -68,11 +65,13 @@ export class ShowCardsInputSearch extends React.Component<Props, State> {
   };
 
   setSizeInput = (event: LayoutChangeEvent) => {
-    this.setState({inputLayout: event.nativeEvent.layout});
+    if (this.inputLayout === undefined && event.nativeEvent.layout.width > 0) {
+      this.inputLayout = event.nativeEvent.layout;
+    }
   };
 
   setSizeText = (event: LayoutChangeEvent) => {
-    this.setState({placeholderFalseLayout: event.nativeEvent.layout});
+    this.placeholderFalseLayout = event.nativeEvent.layout;
   };
 
   getEraseLayout = () => {
@@ -97,12 +96,11 @@ export class ShowCardsInputSearch extends React.Component<Props, State> {
   };
 
   getInputLayout = () => {
-    const {Input, FalsePlaceholder, FalsePlaceholderText} = ShowCardsInputSearchStyles;
+    const {ViewInput, Input, FalsePlaceholder, FalsePlaceholderText} = ShowCardsInputSearchStyles;
+    const {blurFocusAnimation, inputText, hasInputFocus} = this.state;
 
-    const {blurFocusAnimation, inputText, inputLayout, placeholderFalseLayout} = this.state;
-
-    const widthInput = inputLayout ? inputLayout.width : 0;
-    const widthPlaceholder = placeholderFalseLayout ? placeholderFalseLayout.width : 0;
+    const widthInput = this.inputLayout ? this.inputLayout.width : 0;
+    const widthPlaceholder = this.placeholderFalseLayout ? this.placeholderFalseLayout.width : 0;
 
     const placeholderLeftValue = (widthInput - widthPlaceholder) / 2;
     const placeholder = "Search for your card...";
@@ -119,7 +117,7 @@ export class ShowCardsInputSearch extends React.Component<Props, State> {
     };
 
     return (
-      <View style={{flex: 1}}>
+      <ViewInput>
         <Input
           onLayout={this.setSizeInput}
           ref={(ref: TextInput) => (this.inputRef = ref)}
@@ -140,7 +138,7 @@ export class ShowCardsInputSearch extends React.Component<Props, State> {
           </FalsePlaceholderText>
         </FalsePlaceholder>
         {this.getEraseLayout()}
-      </View>
+      </ViewInput>
     );
   };
 
@@ -156,13 +154,13 @@ export class ShowCardsInputSearch extends React.Component<Props, State> {
       }),
       maxWidth: blurFocusAnimation.interpolate({
         inputRange: [0, 1],
-        outputRange: [0, 100],
+        outputRange: ["0%", "100%"],
       }),
       transform: [
         {
           translateX: blurFocusAnimation.interpolate({
             inputRange: [0, 1],
-            outputRange: [20, 0],
+            outputRange: [25, 0],
           }),
         },
       ],

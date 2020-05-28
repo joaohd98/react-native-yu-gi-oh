@@ -12,17 +12,14 @@ export const ShowCardsInputSearchStyles = {
   `,
   ViewInput: styled.View`
     flex: 1;
-    height: 50px;
   `,
   Input: styled(AnimatedTextInput)`
-    width: 95%;
     border: 1px solid ${Colors.grayLight};
     border-radius: 10px;
     padding: 5px;
     background-color: ${Colors.grayLight};
     font-size: 18px;
     margin: 2.5%;
-    opacity: 1;
   `,
   FalsePlaceholder: styled(AnimatedTouchableOpacity)`
     position: absolute;
