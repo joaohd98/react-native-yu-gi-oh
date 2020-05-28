@@ -56,7 +56,7 @@ export class ShowCardsFullImage extends React.Component<Props, State> {
               useNativeDriver: false,
             }),
             Animated.spring(position.y, {
-              toValue: Platform.select({android: tpageY - offset, ios: tpageY - offset})!,
+              toValue: Platform.select({android: tpageY, ios: tpageY - offset})!,
               useNativeDriver: false,
             }),
             Animated.spring(size.x, {
