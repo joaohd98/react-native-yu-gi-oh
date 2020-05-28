@@ -1,5 +1,5 @@
 import React from "react";
-import {Animated, Dimensions, Image, View} from "react-native";
+import {Animated, Dimensions, Platform, View} from "react-native";
 import {AllCardsResponse} from "../../../../services/get-all-cards/response";
 import {ShowCardsFullImageStyles} from "./styles";
 
@@ -44,7 +44,7 @@ export class ShowCardsFullImage extends React.Component<Props, State> {
       position.setValue({x: pageX, y: valueY});
       size.setValue({x: width, y: height});
 
-      this.fullImageView?.measure((tx, ty, twidth, theigth) => {
+      this.fullImageView?.measure((tx, ty, twidth, theigth, tpageX, tpageY) => {
         Animated.stagger(150, [
           Animated.spring(opacity, {
             toValue: 1,
@@ -52,11 +52,11 @@ export class ShowCardsFullImage extends React.Component<Props, State> {
           }),
           Animated.parallel([
             Animated.spring(position.x, {
-              toValue: tx,
+              toValue: Platform.select({android: tpageX, ios: tx})!,
               useNativeDriver: false,
             }),
             Animated.spring(position.y, {
-              toValue: ty,
+              toValue: Platform.select({android: tpageY - offset, ios: tpageY - offset})!,
               useNativeDriver: false,
             }),
             Animated.spring(size.x, {
@@ -64,7 +64,7 @@ export class ShowCardsFullImage extends React.Component<Props, State> {
               useNativeDriver: false,
             }),
             Animated.spring(size.y, {
-              toValue: theigth,
+              toValue: Platform.select({android: theigth + offset, ios: theigth})!,
               useNativeDriver: false,
             }),
           ]),
@@ -131,7 +131,7 @@ export class ShowCardsFullImage extends React.Component<Props, State> {
 
     return (
       <FullImageContainer style={viewStyle} pointerEvents={card ? "auto" : "none"}>
-        <FullImageView ref={ref => (this.fullImageView = ref)} />
+        <FullImageView onLayout={() => {}} ref={ref => (this.fullImageView = ref)} />
         <FullImage style={activeImageStyle} source={image} resizeMode={"contain"} />
         <FullImageButton onPress={this.handleCloseImage}>
           <FullImageIcon name={"times-circle"} />
