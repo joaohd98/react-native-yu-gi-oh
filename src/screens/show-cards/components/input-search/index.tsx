@@ -81,7 +81,7 @@ export class ShowCardsInputSearch extends React.Component<Props, State> {
     const {hasInputFocus, inputText} = this.state;
 
     const eraseInput = () => {
-      Vibration.vibrate(10);
+      Vibration.vibrate(50);
       this.setState({inputText: ""});
     };
 

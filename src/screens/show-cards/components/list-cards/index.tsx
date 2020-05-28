@@ -97,32 +97,24 @@ export class ShowCardsList extends React.Component<Props, State> {
     const valueAnimated = -30;
     const seconds = 200;
 
-    if (!this.state.hasReachBottom) {
-      return <></>;
-    }
-
-    icons.forEach(icon => {
+    icons.forEach((icon, index) => {
       icon.animated.setValue(0);
 
       animations.push(
         Animated.timing(icon.animated, {
           toValue: valueAnimated,
           duration: seconds / 2,
-          useNativeDriver: false,
+          useNativeDriver: true,
         })
       );
       animations.push(
         Animated.timing(icon.animated, {
           toValue: 0,
           duration: seconds / 2,
-          useNativeDriver: false,
+          useNativeDriver: true,
         })
       );
-    });
 
-    Animated.loop(Animated.stagger(seconds, animations)).start();
-
-    icons.forEach((icon, index) => {
       const styles: ViewAnimatedStyles = {
         transform: [
           {
@@ -146,6 +138,8 @@ export class ShowCardsList extends React.Component<Props, State> {
         />
       );
     });
+
+    Animated.loop(Animated.stagger(seconds, animations)).start();
 
     return <ViewFooter>{elements}</ViewFooter>;
   };
@@ -171,11 +165,11 @@ export class ShowCardsList extends React.Component<Props, State> {
     }
 
     Animated.sequence([
-      Animated.delay(150 * (index >= limitIndexAnimation ? 1 : index)),
+      Animated.delay(150 * (index >= limitIndexAnimation ? 0 : index)),
       Animated.timing(animated, {
         toValue: 0,
         duration: 200,
-        useNativeDriver: false,
+        useNativeDriver: true,
       }),
     ]).start();
 

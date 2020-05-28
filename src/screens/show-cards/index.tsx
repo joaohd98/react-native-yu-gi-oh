@@ -15,7 +15,7 @@ export class ShowCards extends React.Component<ShowCardsScreenProps, ShowCardsSc
   };
 
   componentDidMount() {
-    // this.props.getAllCard();
+    this.props.getAllCard();
   }
 
   render() {
